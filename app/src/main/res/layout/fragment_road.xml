@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/road_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:background="#4887E7"
                 android:focusableInTouchMode="true"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:src="@drawable/home" />
 
             <TextView
@@ -97,7 +97,7 @@
                 android:padding="10dp"
                 android:text="집"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <ImageButton
                 android:id="@+id/btnBuilding"
@@ -106,7 +106,7 @@
                 android:layout_toRightOf="@id/tvHome"
                 android:background="#4887E7"
                 android:focusableInTouchMode="true"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:src="@drawable/building" />
 
             <TextView
@@ -117,7 +117,7 @@
                 android:padding="10dp"
                 android:text="회사"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <Button
                 android:id="@+id/btnRoadFind"
@@ -127,10 +127,10 @@
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/road"
                 android:drawableTint="@color/white"
-                android:padding="10dp"
                 android:text="길찾기"
+                android:padding="5dp"
                 android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:textSize="15dp" />
         </RelativeLayout>
     </LinearLayout>
 

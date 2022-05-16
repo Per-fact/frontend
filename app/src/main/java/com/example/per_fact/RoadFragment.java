@@ -1,17 +1,22 @@
 package com.example.per_fact;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import net.daum.android.map.MapActivity;
+import net.daum.mf.map.api.MapView;
 
 public class RoadFragment extends Fragment {
 
@@ -28,8 +33,7 @@ public class RoadFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+
     }
 
     @Override
@@ -59,8 +63,8 @@ public class RoadFragment extends Fragment {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "홈버튼 클릭", Toast.LENGTH_SHORT).show();
-//                ((MainActivity)getActivity()).replaceFragment(MapFragment.newInstance());
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
             }
         });
         return v;

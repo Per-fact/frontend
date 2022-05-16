@@ -11,12 +11,15 @@
         <entry key="app/src/main/res/drawable/tab_color.xml" value="0.1595" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25418395996093757" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.16616801386294175" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.165" />
         <entry key="app/src/main/res/layout/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18432971014492755" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_map2.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_place.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_road.xml" value="0.26190122164212737" />
+        <entry key="app/src/main/res/layout/fragment_road.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.10460992907801418" />
         <entry key="app/src/main/res/xml/selector.xml" value="0.17255434782608695" />
