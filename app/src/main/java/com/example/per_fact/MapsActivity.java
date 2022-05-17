@@ -35,7 +35,7 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
 
     private static final String LOG_TAG = "MapsActivity";
     private EditText et_home;
-    private ImageButton btnBack;
+    private ImageButton btnBack, btnSearch;
     MapView mapView;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -48,13 +48,13 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
         mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
         mapView.setCurrentLocationEventListener(this);
-        et_home = findViewById(R.id.et_startStation);
+        et_home = findViewById(R.id.et_home);
         btnBack = findViewById(R.id.btnBack);
+        btnSearch = findViewById(R.id.btnSearch);
 
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
@@ -83,9 +83,6 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
         address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
         et_home.setText(address);
         mapView.setShowCurrentLocationMarker(true);
-//        MapPOIItem marker = new MapPOIItem();
-//        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude));
-//        marker.setItemName(address);
 
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f, %f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
     }
