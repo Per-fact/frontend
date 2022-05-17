@@ -51,7 +51,12 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
         mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+        // 중심점 변경
         mapView.setCurrentLocationEventListener(this);
+
+        // 줌 아웃
+        mapView.zoomOut(true);
+
         et_home = findViewById(R.id.et_home);
         btnBack = findViewById(R.id.btnBack);
         btnSearch = findViewById(R.id.btnSearch);
@@ -66,6 +71,25 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String address = et_home.getText().toString();
+
+                AddrSearchRepository.getINSTANCE().getAddressList(address, 1, 10, new AddrSearchRepository.AddressResponseListener() {
+                    @Override
+                    public void onSuccessResponse(Location locationData) {
+                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailResponse() {
+                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
