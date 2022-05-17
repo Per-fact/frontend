@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case R.id.tab_map: {
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_layout, new MapFragment())
+                            .replace(R.id.home_layout, new RoadFragment())
                             .commit();
                     return true;
                 }
@@ -89,5 +89,4 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-
 }
