@@ -1,4 +1,6 @@
-package com.example.per_fact;
+package com.example.per_fact.Api;
+
+import com.example.per_fact.Data.Location;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

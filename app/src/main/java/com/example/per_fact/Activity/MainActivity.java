@@ -1,17 +1,17 @@
-package com.example.per_fact;
+package com.example.per_fact.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import com.example.per_fact.Fragment.HomeFragment;
+import com.example.per_fact.Fragment.MypageFragment;
+import com.example.per_fact.Fragment.PlaceFragment;
+import com.example.per_fact.Fragment.RoadFragment;
+import com.example.per_fact.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

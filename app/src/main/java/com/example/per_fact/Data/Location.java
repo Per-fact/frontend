@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Data;
 
 import com.google.gson.annotations.SerializedName;
 

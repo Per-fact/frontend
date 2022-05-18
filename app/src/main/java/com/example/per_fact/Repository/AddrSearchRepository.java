@@ -1,6 +1,9 @@
-package com.example.per_fact;
+package com.example.per_fact.Repository;
 
 import android.util.Log;
+
+import com.example.per_fact.Data.Location;
+import com.example.per_fact.RetrofitNet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
