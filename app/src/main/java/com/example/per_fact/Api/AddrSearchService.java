@@ -9,5 +9,5 @@ import retrofit2.http.Query;
 
 public interface AddrSearchService {
     @GET("v2/local/search/address.json")
-    Call<Location> searchAddressList(@Query("query") String query,  @Query("page") int page, @Query("size") int size, @Header("Authorization") String apikey);
+    Call<Location> searchAddressList(@Query("query") String query, @Query("page") int page, @Query("size") int size, @Header("Authorization") String apikey);
 }
