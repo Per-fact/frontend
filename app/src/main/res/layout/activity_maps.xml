@@ -56,8 +56,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:backgroundTint="#B3FFFFFF"
-                android:src="@drawable/search" />
+                android:layout_marginTop="5dp"
+                android:background="#BACDEC"
+                android:src="@drawable/search"
+                android:layout_marginRight="5dp" />
+
+            <TextView
+                android:id="@+id/tv_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_home"
+                android:text="주소 확인 후 집 등록을 완료하세요!"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"
+                android:textSize="15dp"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/btnAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnSearch"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:text="집 등록하기"
+                android:background="@drawable/shape"
+                android:textColor="@color/white"
+                android:visibility="invisible"/>
         </RelativeLayout>
 
     </LinearLayout>

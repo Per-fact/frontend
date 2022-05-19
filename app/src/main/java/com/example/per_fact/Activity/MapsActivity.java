@@ -19,14 +19,18 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.per_fact.Data.Location;
 import com.example.per_fact.R;
 import com.example.per_fact.Repository.AddrSearchRepository;
+import com.example.per_fact.RetrofitNet;
 
+import net.daum.android.map.MapViewEventListener;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapReverseGeoCoder;
@@ -35,18 +39,24 @@ import net.daum.mf.map.api.MapView;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MapsActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
     private static final String LOG_TAG = "MapsActivity";
     private EditText et_home;
     private ImageButton btnBack, btnSearch;
+    private Button btnAdmin;
+    private TextView tv_complete;
     MapView mapView;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
 
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
     MapPoint.GeoCoordinate mapPointGeo;
-    String address;
+    String search, placeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +65,12 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
         mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        // 중심점 변경
-        mapView.setCurrentLocationEventListener(this);
-
-        // 줌 아웃
-        mapView.zoomOut(true);
 
         et_home = findViewById(R.id.et_home);
         btnBack = findViewById(R.id.btnBack);
         btnSearch = findViewById(R.id.btnSearch);
-
-        if (!checkLocationServicesStatus()) {
-            showDialogForLocationServiceSetting();
-        } else {
-            checkRunTimePermission();
-        }
+        btnAdmin = findViewById(R.id.btnAdmin);
+        tv_complete = findViewById(R.id.tv_complete);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,51 +82,84 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String address = et_home.getText().toString();
+                search = et_home.getText().toString();
 
-                AddrSearchRepository.getINSTANCE().getAddressList(address, 1, 10, new AddrSearchRepository.AddressResponseListener() {
-                    @Override
-                    public void onSuccessResponse(Location locationData) {
-                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_SHORT).show();
-                        for (int i = 0; i < locationData.documentsList.size(); i++) {
-                            //마커 찍기
-                            MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(Double.parseDouble(locationData.documentsList.get(i).getX()), 126.99089033876304);
-                            MapPOIItem marker = new MapPOIItem();
-                            marker.setItemName(address);
-                            marker.setTag(0);
-                            marker.setMapPoint(MARKER_POINT);
-                            marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-                            marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+                if (search != null) {
+                    Call<Location> call = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(search, "KakaoAK b7da65cd26d1be7fe973d194db579efd");
+                    call.enqueue(new Callback<Location>() { //검색 조건
+                        @Override
+                        public void onResponse(Call<Location> call, Response<Location> response) {
+                            if (response.isSuccessful()) {
+                                if (response.body() != null) {
+                                    for (int i = 0; i < response.body().documentsList.size(); i++) {
+                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getPlace_name());
+                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getCategory_name());
+                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getX());
+                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getY());
+                                        //마커 찍기
+                                        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633);
+                                        MapPOIItem marker = new MapPOIItem();
 
-                            mapView.addPOIItem(marker);
-                            // 줌 레벨 변경
-                            mapView.setZoomLevel(6, true);
+                                        marker.setItemName(response.body().documentsList.get(i).getPlace_name());
+                                        marker.setTag(0);
+                                        marker.setMapPoint(MARKER_POINT);
+                                        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                                        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+                                        mapView.addPOIItem(marker);
+                                        // 줌 레벨 변경
+                                        mapView.setZoomLevel(7, true);
+
+                                        mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
+                                            @Override
+                                            public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+                                                et_home.setText("우리 집");
+                                                tv_complete.setVisibility(View.VISIBLE);
+                                                btnAdmin.setVisibility(View.VISIBLE);
+
+                                                btnAdmin.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Toast.makeText(MapsActivity.this, "집 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                                                        onBackPressed();
+                                                    }
+                                                });
+                                            }
+
+                                            @Override
+                                            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+                                                Toast.makeText(MapsActivity.this, "2 선택되었습니다", Toast.LENGTH_SHORT).show();
+
+                                            }
+
+                                            @Override
+                                            public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+                                                Toast.makeText(MapsActivity.this, "3 선택되었습니다", Toast.LENGTH_SHORT).show();
+
+                                            }
+
+                                            @Override
+                                            public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+                                                Toast.makeText(MapsActivity.this, "4 선택되었습니다", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                    }
+                                }
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailResponse() {
-                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Location> call, Throwable t) {
+                            Toast.makeText(MapsActivity.this, search, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
-        mapView.setShowCurrentLocationMarker(false);
-    }
-
-    @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters) {
-        mapPointGeo = currentLocation.getMapPointGeoCoord(); //현재 위치
-        address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
-        et_home.setText(address);
-        mapView.setShowCurrentLocationMarker(true);
-
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f, %f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
     }
 
@@ -271,34 +305,5 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    public static String getCompleteAddressString(Context context, double LATITUDE, double LONGITUDE) {
-        String strAdd = "";
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
-
-
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-                Log.w("MyCurrentloctionaddress", strReturnedAddress.toString());
-            } else {
-                Log.w("MyCurrentloctionaddress", "No Address returned!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.w("MyCurrentloctionaddress", "Canont get Address!");
-        }
-
-        //"대한민국" 글자 지우기
-        strAdd = strAdd.substring(5);
-
-        return strAdd;
     }
 }
