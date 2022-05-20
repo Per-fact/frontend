@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +22,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.example.per_fact.Data.Location;
+import com.example.per_fact.R;
+import com.example.per_fact.Repository.AddrSearchRepository;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -51,7 +55,12 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
         mapView = new MapView(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+        // 중심점 변경
         mapView.setCurrentLocationEventListener(this);
+
+        // 줌 아웃
+        mapView.zoomOut(true);
+
         et_home = findViewById(R.id.et_home);
         btnBack = findViewById(R.id.btnBack);
         btnSearch = findViewById(R.id.btnSearch);
@@ -66,6 +75,39 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String address = et_home.getText().toString();
+
+                AddrSearchRepository.getINSTANCE().getAddressList(address, 1, 10, new AddrSearchRepository.AddressResponseListener() {
+                    @Override
+                    public void onSuccessResponse(Location locationData) {
+                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_SHORT).show();
+                        for (int i = 0; i < locationData.documentsList.size(); i++) {
+                            //마커 찍기
+                            MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(Double.parseDouble(locationData.documentsList.get(i).getX()), 126.99089033876304);
+                            MapPOIItem marker = new MapPOIItem();
+                            marker.setItemName(address);
+                            marker.setTag(0);
+                            marker.setMapPoint(MARKER_POINT);
+                            marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                            marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+                            mapView.addPOIItem(marker);
+                            // 줌 레벨 변경
+                            mapView.setZoomLevel(6, true);
+                        }
+                    }
+
+                    @Override
+                    public void onFailResponse() {
+                        Toast.makeText(MapsActivity.this, address, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

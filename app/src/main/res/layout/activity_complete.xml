@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/container">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/complete" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일정 등록이 완료되었습니다!"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/start_prepare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%s 부터 준비를 시작해주세요 :)"
+        android:textSize="15dp"/>
+
+    <Button
+        android:id="@+id/gotoHome"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#4F6D9FEC"
+        android:text="홈으로 가기"
+        android:textColor="#3685FF" />
+
+    <TextView
+        android:id="@+id/et_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="아직 장소를 못 정하셨나요?"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

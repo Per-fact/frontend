@@ -5,21 +5,26 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/drawable-v24/shape.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/toggle_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/calendar.xml" value="0.112" />
+        <entry key="app/src/main/res/drawable/custom_checkbox.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/et_shape.xml" value="0.1125" />
         <entry key="app/src/main/res/drawable/selector.xml" value="0.1655" />
         <entry key="app/src/main/res/drawable/tab_color.xml" value="0.1595" />
+        <entry key="app/src/main/res/layout/activity_complete.xml" value="0.18608703613281252" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25418395996093757" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.16616801386294175" />
-        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_office.xml" value="0.256231689453125" />
+        <entry key="app/src/main/res/layout/activity_schedule.xml" value="0.14560394287109377" />
         <entry key="app/src/main/res/layout/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18432971014492755" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_map2.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_place.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_road.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_road.xml" value="0.20431671142578128" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.10460992907801418" />
         <entry key="app/src/main/res/xml/selector.xml" value="0.17255434782608695" />

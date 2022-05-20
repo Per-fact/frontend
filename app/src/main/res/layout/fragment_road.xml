@@ -134,6 +134,9 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -244,6 +247,7 @@
                 android:text="성수역1번출구 정류장" />
 
             <Button
+                android:id="@+id/btnSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:layout_alignParentRight="true"
@@ -253,7 +257,6 @@
                 android:text="경로 선택하기"
                 android:textColor="@color/white" />
         </RelativeLayout>
-
-
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>
