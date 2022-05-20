@@ -13,12 +13,13 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.per_fact.Activity.MapsActivity;
+import com.example.per_fact.Activity.ScheduleActivity;
 import com.example.per_fact.R;
 
 public class RoadFragment extends Fragment {
 
     EditText startStation, endStation;
-    Button switchStation, btnRoadFind, btnBus, btnSubway, btnTotal;
+    Button switchStation, btnRoadFind, btnBus, btnSubway, btnTotal, btnSelect;
     ImageButton btnHome, btnBuilding;
     TextView tvHome, tvBuilding, total, tv_min, tv_busNumber, tv_startStation, tv_midStation, tv_endStation;
 
@@ -48,6 +49,7 @@ public class RoadFragment extends Fragment {
         btnTotal = v.findViewById(R.id.btnTotal);
         btnHome = v.findViewById(R.id.btnHome);
         btnBuilding = v.findViewById(R.id.btnBuilding);
+        btnSelect = v.findViewById(R.id.btnSelect);
         tvHome = v.findViewById(R.id.tvHome);
         tvBuilding = v.findViewById(R.id.tvBuilding);
         total = v.findViewById(R.id.total);
@@ -57,6 +59,12 @@ public class RoadFragment extends Fragment {
         tv_midStation = v.findViewById(R.id.tv_midStation);
         tv_endStation = v.findViewById(R.id.tv_EndStation);
 
+        clickListener();
+
+        return v;
+    }
+
+    private void clickListener() {
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +72,14 @@ public class RoadFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        return v;
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

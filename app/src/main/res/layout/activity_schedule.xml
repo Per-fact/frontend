@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="일정 제목을 입력해주세요."
-        android:padding="30dp"/>
+        android:padding="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -134,7 +134,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -148,12 +147,12 @@
             app:srcCompat="@drawable/clock"
             android:layout_marginTop="10dp"/>
 
-        <EditText
-            android:id="@+id/et_prepare"
+        <Button
+            android:id="@+id/btnPrepare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="예상 준비 시간을 선택해주세요."
-            android:padding="10dp"/>
+            android:textSize="18dp"/>
     </LinearLayout>
 
 
