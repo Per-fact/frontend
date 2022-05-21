@@ -129,20 +129,41 @@ public class ScheduleActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i) {
-                            case 0:
+                            case 0:btnPrepare.setText("10분");
+                                break;
                             case 1:
+                                btnPrepare.setText("20분");
+                                break;
                             case 2:
+                                btnPrepare.setText("30분");
+                                break;
                             case 3:
+                                btnPrepare.setText("40분");
+                                break;
                             case 4:
+                                btnPrepare.setText("50분");
+                                break;
                             case 5:
+                                btnPrepare.setText("1시간");
+                                break;
                             case 6:
+                                btnPrepare.setText("1시간 10분");
+                                break;
                             case 7:
+                                btnPrepare.setText("1시간 20분");
+                                break;
                             case 8:
+                                btnPrepare.setText("1시간 30분");
+                                break;
                             case 9:
+                                btnPrepare.setText("1시간 40분");
+                                break;
                             case 10:
+                                btnPrepare.setText("1시간 50분");
+                                break;
                             case 11:
-                            case 12: btnPrepare.setText(i + "분");
-                            break;
+                                btnPrepare.setText("2시간");
+                                break;
                             default:
                                 Toast.makeText(ScheduleActivity.this, "시간을 선택해주세요.", Toast.LENGTH_SHORT).show();
                                 break;
