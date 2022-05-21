@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.per_fact" >
+=======
+    package="com.example.per_fact">
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
     <!-- 인터넷, 위치 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+<<<<<<< HEAD
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -22,6 +31,17 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
+=======
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Per_fact"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".CheckListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".Activity.OfficeActivity"
             android:exported="true"></activity>
         <activity android:name=".Activity.ScheduleActivity"
@@ -40,6 +61,8 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
+=======
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
     </application>
 
 </manifest>

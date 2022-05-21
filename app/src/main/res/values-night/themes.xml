@@ -12,7 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+<<<<<<< HEAD
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+=======
+<<<<<<< HEAD
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+=======
+>>>>>>> 5df838e0a3996dfb0a8eb6ca16e3a4a05c04972f
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
     </style>
 </resources>
