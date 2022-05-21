@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.per_fact.Fragment.PlaceFragment;
+
 import com.example.per_fact.Fragment.RoadFragment;
 import com.example.per_fact.R;
 

@@ -37,7 +37,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
-    private ArrayList<CheckListDictionary> mArrayList;
+    private ArrayList<com.example.per_fact.CheckListDictionary> mArrayList;
 
     CheckBox checkBox0;
     CheckBox checkBox1;
@@ -142,7 +142,7 @@ public class HomeFragment extends Fragment {
                 checkBox8.setVisibility(View.INVISIBLE);
                 checkBox9.setVisibility(View.INVISIBLE);
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), CheckListActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.CheckListActivity.class);
                 intent.putParcelableArrayListExtra("checklist", mArrayList);
                 startActivityForResult(intent,0);
             }
@@ -173,22 +173,14 @@ public class HomeFragment extends Fragment {
                     //api로 받은 파일 jsonobject로 새로운 객체 선언
                     JSONObject jsonObject = new JSONObject(response);
 
-
                     //도시 키값 받기
                     String city = jsonObject.getString("name");
-
-//                    cityView.setText(city);
-
 
                     //날씨 키값 받기
                     JSONArray weatherJson = jsonObject.getJSONArray("weather");
                     JSONObject weatherObj = weatherJson.getJSONObject(0);
-
                     String weather = weatherObj.getString("description");
-
                     txt_weather.setText(weather);
-
-
 
                     //기온 키값 받기
                     JSONObject tempK = new JSONObject(jsonObject.getString("main"));
