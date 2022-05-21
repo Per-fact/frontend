@@ -80,6 +80,5 @@ public class RoadFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 }

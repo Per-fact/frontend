@@ -127,8 +127,8 @@
                 android:background="@drawable/shape"
                 android:drawableLeft="@drawable/road"
                 android:drawableTint="@color/white"
-                android:text="길찾기"
                 android:padding="5dp"
+                android:text="길찾기"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
         </RelativeLayout>
