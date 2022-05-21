@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/calendar.xml" value="0.112" />
         <entry key="app/src/main/res/drawable/custom_checkbox.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/et_shape.xml" value="0.1125" />
+        <entry key="app/src/main/res/drawable/searchfilter.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/selector.xml" value="0.1655" />
         <entry key="app/src/main/res/drawable/tab_color.xml" value="0.1595" />
         <entry key="app/src/main/res/layout/activity_complete.xml" value="0.18608703613281252" />
@@ -23,8 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_map2.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_place.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_road.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_place.xml" value="0.18231022884971215" />
         <entry key="app/src/main/res/layout/fragment_road.xml" value="0.20431671142578128" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.10460992907801418" />
