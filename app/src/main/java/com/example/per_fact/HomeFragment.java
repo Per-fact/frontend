@@ -1,13 +1,16 @@
 package com.example.per_fact;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,13 +30,27 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
+    private ArrayList<CheckListDictionary> mArrayList;
 
+    CheckBox checkBox0;
+    CheckBox checkBox1;
+    CheckBox checkBox2;
+    CheckBox checkBox3;
+    CheckBox checkBox4;
+    CheckBox checkBox5;
+    CheckBox checkBox6;
+    CheckBox checkBox7;
+    CheckBox checkBox8;
+    CheckBox checkBox9;
+
+    ImageButton btn_checkList_add;
     ImageButton btn_week_schedule_open;
     ImageButton btn_week_schedule_close;
     LinearLayout week_schedule_item2;
@@ -62,6 +79,18 @@ public class HomeFragment extends Fragment {
         ic_weather = (ImageView)v.findViewById(R.id.ic_weather);
         current_tmp = (TextView) v.findViewById(R.id.txt_current_tmp);
         txt_weather = (TextView) v.findViewById(R.id.txt_weather);
+
+        btn_checkList_add = (ImageButton) v.findViewById(R.id.check_add_button);
+        checkBox0 = (CheckBox) v.findViewById(R.id.checkBox0);
+        checkBox1 = (CheckBox) v.findViewById(R.id.checkBox0);
+        checkBox2 = (CheckBox) v.findViewById(R.id.checkBox1);
+        checkBox3 = (CheckBox) v.findViewById(R.id.checkBox2);
+        checkBox4 = (CheckBox) v.findViewById(R.id.checkBox3);
+        checkBox5 = (CheckBox) v.findViewById(R.id.checkBox4);
+        checkBox6 = (CheckBox) v.findViewById(R.id.checkBox5);
+        checkBox7 = (CheckBox) v.findViewById(R.id.checkBox6);
+        checkBox8 = (CheckBox) v.findViewById(R.id.checkBox7);
+        checkBox9 = (CheckBox) v.findViewById(R.id.checkBox8);
 
 
         //상단 텍스트바 날짜 출력
@@ -96,6 +125,30 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        mArrayList = new ArrayList<>();
+
+        //체크리스트 추가 버튼 눌렀을 때 체크리스트액티비티 변환
+        btn_checkList_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkBox0.setVisibility(View.INVISIBLE);
+                checkBox1.setVisibility(View.INVISIBLE);
+                checkBox2.setVisibility(View.INVISIBLE);
+                checkBox3.setVisibility(View.INVISIBLE);
+                checkBox4.setVisibility(View.INVISIBLE);
+                checkBox5.setVisibility(View.INVISIBLE);
+                checkBox6.setVisibility(View.INVISIBLE);
+                checkBox7.setVisibility(View.INVISIBLE);
+                checkBox8.setVisibility(View.INVISIBLE);
+                checkBox9.setVisibility(View.INVISIBLE);
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), CheckListActivity.class);
+                intent.putParcelableArrayListExtra("checklist", mArrayList);
+                startActivityForResult(intent,0);
+            }
+        });
+
+
         return v;
     }//end of onCreateView
 
@@ -108,7 +161,6 @@ public class HomeFragment extends Fragment {
 
     //현재 서울 날씨 출력
     private void CurrentCall() {
-        txt_weather.setText("테스트테스트2");
 
 
         String url = "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=31594f3577ef731e2ce17c60a34f04a3";
@@ -188,5 +240,70 @@ public class HomeFragment extends Fragment {
         }
     }
     //End of 현재서울날씨 출력
+
+    //체크리스트엑티비티에서 받아와 화면에 출력
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == 0) {
+            mArrayList = new ArrayList<>();
+            mArrayList = data.getParcelableArrayListExtra("checklist");
+
+            for (int i = 0; i < mArrayList.size(); i++) {
+                switch (i) {
+                    case 0:
+                        checkBox0.setVisibility(View.VISIBLE);
+                        checkBox0.setText(mArrayList.get(0).getId());
+                        break;
+                    case 1:
+                        checkBox1.setVisibility(View.VISIBLE);
+                        checkBox1.setText(mArrayList.get(1).getId());
+                        break;
+                    case 2:
+                        checkBox2.setVisibility(View.VISIBLE);
+                        checkBox2.setText(mArrayList.get(2).getId());
+                        break;
+                    case 3:
+                        checkBox3.setVisibility(View.VISIBLE);
+                        checkBox3.setText(mArrayList.get(3).getId());
+                        break;
+                    case 4:
+                        checkBox4.setVisibility(View.VISIBLE);
+                        checkBox4.setText(mArrayList.get(4).getId());
+                        break;
+                    case 5:
+                        checkBox5.setVisibility(View.VISIBLE);
+                        checkBox5.setText(mArrayList.get(5).getId());
+                        break;
+                    case 6:
+                        checkBox6.setVisibility(View.VISIBLE);
+                        checkBox6.setText(mArrayList.get(6).getId());
+                        break;
+                    case 7:
+                        checkBox7.setVisibility(View.VISIBLE);
+                        checkBox7.setText(mArrayList.get(7).getId());
+                        break;
+                    case 8:
+                        checkBox8.setVisibility(View.VISIBLE);
+                        checkBox8.setText(mArrayList.get(8).getId());
+                        break;
+                    case 9:
+                        checkBox9.setVisibility(View.VISIBLE);
+                        checkBox9.setText(mArrayList.get(9).getId());
+                        break;
+
+                }
+
+
+            }
+
+
+
+
+
+
+        }
+    }
 
 }
