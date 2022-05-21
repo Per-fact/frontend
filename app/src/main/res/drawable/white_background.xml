@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   
 </selector>
+=======
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FFFFFF"/>
+    <corners android:radius="14dp"/>
+
+
+</shape>
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
