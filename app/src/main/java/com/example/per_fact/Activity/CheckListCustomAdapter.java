@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustomAdapter.CustomViewHolder> {
 
-    private ArrayList<CheckListDictionary> mList;
+    private ArrayList<com.example.per_fact.CheckListDictionary> mList;
     private Context mContext;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder
@@ -43,7 +43,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
         }
     }
 
-    public CheckListCustomAdapter(Context context, ArrayList<CheckListDictionary> list) {
+    public CheckListCustomAdapter(Context context, ArrayList<com.example.per_fact.CheckListDictionary> list) {
         mList = list;
         mContext = context;
 
@@ -116,7 +116,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                                     public void onClick(View v) {
                                         String strID = editTextID.getText().toString();
 
-                                        CheckListDictionary dict = new CheckListDictionary(strID);
+                                        com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID);
                                         //여기
 
 

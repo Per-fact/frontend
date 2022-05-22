@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#EEF3Fb"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <ImageButton
         android:id="@+id/Check_list_back_btn"
