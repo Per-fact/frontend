@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -82,15 +84,15 @@ public class HomeFragment extends Fragment {
 
         btn_checkList_add = (ImageButton) v.findViewById(R.id.check_add_button);
         checkBox0 = (CheckBox) v.findViewById(R.id.checkBox0);
-        checkBox1 = (CheckBox) v.findViewById(R.id.checkBox0);
-        checkBox2 = (CheckBox) v.findViewById(R.id.checkBox1);
-        checkBox3 = (CheckBox) v.findViewById(R.id.checkBox2);
-        checkBox4 = (CheckBox) v.findViewById(R.id.checkBox3);
-        checkBox5 = (CheckBox) v.findViewById(R.id.checkBox4);
-        checkBox6 = (CheckBox) v.findViewById(R.id.checkBox5);
-        checkBox7 = (CheckBox) v.findViewById(R.id.checkBox6);
-        checkBox8 = (CheckBox) v.findViewById(R.id.checkBox7);
-        checkBox9 = (CheckBox) v.findViewById(R.id.checkBox8);
+        checkBox1 = (CheckBox) v.findViewById(R.id.checkBox1);
+        checkBox2 = (CheckBox) v.findViewById(R.id.checkBox2);
+        checkBox3 = (CheckBox) v.findViewById(R.id.checkBox3);
+        checkBox4 = (CheckBox) v.findViewById(R.id.checkBox4);
+        checkBox5 = (CheckBox) v.findViewById(R.id.checkBox5);
+        checkBox6 = (CheckBox) v.findViewById(R.id.checkBox6);
+        checkBox7 = (CheckBox) v.findViewById(R.id.checkBox7);
+        checkBox8 = (CheckBox) v.findViewById(R.id.checkBox8);
+        checkBox9 = (CheckBox) v.findViewById(R.id.checkBox9);
 
 
         //상단 텍스트바 날짜 출력
@@ -131,6 +133,7 @@ public class HomeFragment extends Fragment {
         btn_checkList_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 checkBox0.setVisibility(View.INVISIBLE);
                 checkBox1.setVisibility(View.INVISIBLE);
                 checkBox2.setVisibility(View.INVISIBLE);
@@ -142,8 +145,47 @@ public class HomeFragment extends Fragment {
                 checkBox8.setVisibility(View.INVISIBLE);
                 checkBox9.setVisibility(View.INVISIBLE);
 
+                //체크박스상태를 배열에 담아 전달
+                boolean [] checkArray;
+                checkArray = new boolean[mArrayList.size()];
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    switch (i) {
+                        case 0:
+                            checkArray[i] = checkBox0.isChecked();
+                            break;
+                        case 1:
+                            checkArray[i] = checkBox1.isChecked();
+                            break;
+                        case 2:
+                            checkArray[i] = checkBox2.isChecked();
+                            break;
+                        case 3:
+                            checkArray[i] = checkBox3.isChecked();
+                            break;
+                        case 4:
+                            checkArray[i] = checkBox4.isChecked();
+                            break;
+                        case 5:
+                            checkArray[i] = checkBox5.isChecked();
+                            break;
+                        case 6:
+                            checkArray[i] = checkBox6.isChecked();
+                            break;
+                        case 7:
+                            checkArray[i] = checkBox7.isChecked();
+                            break;
+                        case 8:
+                            checkArray[i] = checkBox8.isChecked();
+                            break;
+                        case 9:
+                            checkArray[i] = checkBox9.isChecked();
+                            break;
+                    }
+                }
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.CheckListActivity.class);
                 intent.putParcelableArrayListExtra("checklist", mArrayList);
+                intent.putExtra("checkbox", checkArray);
                 startActivityForResult(intent,0);
             }
         });
@@ -241,55 +283,65 @@ public class HomeFragment extends Fragment {
         if (resultCode == 0) {
             mArrayList = new ArrayList<>();
             mArrayList = data.getParcelableArrayListExtra("checklist");
+            boolean [] checkArray;
+            checkArray = new boolean[mArrayList.size()];
+            checkArray = data.getBooleanArrayExtra("checkbox");
+
 
             for (int i = 0; i < mArrayList.size(); i++) {
                 switch (i) {
                     case 0:
                         checkBox0.setVisibility(View.VISIBLE);
                         checkBox0.setText(mArrayList.get(0).getId());
+                        checkBox0.setChecked(checkArray[0]);
                         break;
                     case 1:
                         checkBox1.setVisibility(View.VISIBLE);
                         checkBox1.setText(mArrayList.get(1).getId());
+                        checkBox1.setChecked(checkArray[1]);
                         break;
                     case 2:
                         checkBox2.setVisibility(View.VISIBLE);
                         checkBox2.setText(mArrayList.get(2).getId());
+                        checkBox2.setChecked(checkArray[2]);
                         break;
                     case 3:
                         checkBox3.setVisibility(View.VISIBLE);
                         checkBox3.setText(mArrayList.get(3).getId());
+                        checkBox3.setChecked(checkArray[3]);
                         break;
                     case 4:
                         checkBox4.setVisibility(View.VISIBLE);
                         checkBox4.setText(mArrayList.get(4).getId());
+                        checkBox4.setChecked(checkArray[4]);
                         break;
                     case 5:
                         checkBox5.setVisibility(View.VISIBLE);
                         checkBox5.setText(mArrayList.get(5).getId());
+                        checkBox5.setChecked(checkArray[5]);
                         break;
                     case 6:
                         checkBox6.setVisibility(View.VISIBLE);
                         checkBox6.setText(mArrayList.get(6).getId());
+                        checkBox6.setChecked(checkArray[6]);
                         break;
                     case 7:
                         checkBox7.setVisibility(View.VISIBLE);
                         checkBox7.setText(mArrayList.get(7).getId());
+                        checkBox7.setChecked(checkArray[7]);
                         break;
                     case 8:
                         checkBox8.setVisibility(View.VISIBLE);
                         checkBox8.setText(mArrayList.get(8).getId());
+                        checkBox8.setChecked(checkArray[8]);
                         break;
                     case 9:
                         checkBox9.setVisibility(View.VISIBLE);
                         checkBox9.setText(mArrayList.get(9).getId());
+                        checkBox9.setChecked(checkArray[9]);
                         break;
-
                 }
-
-
             }
-
 
 
 

@@ -15,20 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 public class CheckListActivity extends AppCompatActivity {
     ImageButton buttonInsert;
@@ -39,6 +27,8 @@ public class CheckListActivity extends AppCompatActivity {
     private com.example.per_fact.CheckListCustomAdapter mAdapter;
     private int count = -1;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +37,6 @@ public class CheckListActivity extends AppCompatActivity {
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main_list);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
 
         mArrayList = new ArrayList<>();
 
@@ -64,17 +53,20 @@ public class CheckListActivity extends AppCompatActivity {
         mArrayList_check = new ArrayList<>();
         Intent intent = getIntent();
         mArrayList_check = intent.getParcelableArrayListExtra("checklist");
-        for (int i = 0; i < mArrayList_check.size(); i++) {
-            String item = mArrayList_check.get(i).getId();
 
+
+        for (int i = 0; i < mArrayList_check.size(); i++) {
+            boolean [] checkArray;
+            checkArray = new boolean[mArrayList.size()];
+            checkArray = intent.getBooleanArrayExtra("checkbox");
+
+            String item = mArrayList_check.get(i).getId();
             com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(item);
 
-            mArrayList.add(0, dict); //첫 줄에 삽입
-            //mArrayList.add(dict); //마지막 줄에 삽입
+            mArrayList.add(dict); //마지막 줄에 삽입
             mAdapter.notifyDataSetChanged(); //변경된 데이터를 화면에 반영
-
+            mArrayList.get(i).setSelected(checkArray[i]);
         }
-
 
 
         buttonInsert = (ImageButton)findViewById(R.id.button_main_insert);
@@ -102,8 +94,7 @@ public class CheckListActivity extends AppCompatActivity {
 
                         com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID);
 
-                        mArrayList.add(0, dict); //첫 줄에 삽입
-                        //mArrayList.add(dict); //마지막 줄에 삽입
+                        mArrayList.add(dict); //마지막 줄에 삽입
                         mAdapter.notifyDataSetChanged(); //변경된 데이터를 화면에 반영
 
                         dialog.dismiss();
@@ -114,16 +105,27 @@ public class CheckListActivity extends AppCompatActivity {
             }
         });
 
+
         //뒤로가기 버튼 클릭시
         btn_back = (ImageButton) findViewById(R.id.Check_list_back_btn);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //체크박스 상태를 배열에 담아 전달
+                boolean [] checkArray;
+                checkArray = new boolean[mArrayList.size()];
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    checkArray[i] = mArrayList.get(i).isSelected();
+                }
+
                 Intent data = new Intent();
                 data.putParcelableArrayListExtra("checklist", mArrayList);
+                data.putExtra("checkbox", checkArray);
                 setResult(0,data);
 
                 finish();
+
             }
         });
     }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -27,9 +28,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
     private ArrayList<com.example.per_fact.CheckListDictionary> mList;
     private Context mContext;
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder
-
-    {
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         protected CheckBox mId;
         protected ImageButton mOption;
@@ -39,7 +38,6 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
 
             this.mId = (CheckBox) view.findViewById(R.id.textview_recyclerview_id);
             this.mOption = (ImageButton) view.findViewById(R.id.btn_option);
-
         }
     }
 
@@ -67,6 +65,23 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder viewholder, @SuppressLint("RecyclerView") int position) {
+
+        //final로 선언해 체크박스의 체크상태값을 바뀌지 않게함
+        final com.example.per_fact.CheckListDictionary item = mList.get(position);
+        //먼저 체크박스의 리스너를 null로 초기화
+        viewholder.mId.setOnCheckedChangeListener(null);
+        //getter로 체크 상태값을 가져와서 setter를 통해 이 값을 아이템 안의 체크박스에 set한다
+        viewholder.mId.setChecked(item.isSelected());
+        //체크박스의 상태값을 알기위한 리스너 부착
+        viewholder.mId.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                item.setSelected(compoundButton.isChecked());
+                viewholder.mId.setSelected(compoundButton.isChecked());
+
+            }
+        });
+        //
 
         viewholder.mId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
@@ -117,6 +132,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                                         String strID = editTextID.getText().toString();
 
                                         com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID);
+
                                         //여기
 
 
