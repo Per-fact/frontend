@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.per_fact">
+    package="com.example.per_fact" >
+
     <!-- 인터넷, 위치 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -24,7 +25,10 @@
             android:name=".Activity.CheckListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.CheckListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +45,26 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
+            android:exported="true">
+        </activity>
+
+
+<!--        마이페이지액티비티들선언-->
+        <activity
+            android:name=".Activity.MypageAsk"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.MypageSetting"
+            android:exported="true"/>
+        <activity android:name=".Activity.MypageLogout"
+            android:theme="@android:style/Theme.Dialog"/>
+
+
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/myappKey" />
+
     </application>
 
 </manifest>

@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragment.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="메인 페이지" />
-=======
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,6 +7,7 @@
     android:background="#EEF3Fb"
     android:orientation="vertical"
     tools:context=".HomeFragment">
+
 
 
     <ScrollView
@@ -345,13 +334,14 @@
                 android:id="@+id/check_add_button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginTop="324dp"
                 android:background="@drawable/ic_checkadd"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.944"
+                app:layout_constraintHorizontal_bias="0.955"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/check_list" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <CalendarView
                 android:id="@+id/calendarView"
@@ -635,6 +625,5 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="20dp"
         android:background="@drawable/ic_button_add"/>
->>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
 
 </FrameLayout>

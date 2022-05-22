@@ -1,10 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-<<<<<<< HEAD
-    <style name="Theme.Per_fact" parent="Theme.AppCompat.DayNight.NoActionBar">
-=======
+
     <style name="Theme.Per_fact" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
->>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -16,7 +14,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-<<<<<<< HEAD
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -26,12 +23,5 @@
     </style>
     <style name="Theme.Per_fact.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Per_fact.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-=======
-<<<<<<< HEAD
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-=======
->>>>>>> 5df838e0a3996dfb0a8eb6ca16e3a4a05c04972f
-    </style>
->>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
+
 </resources>

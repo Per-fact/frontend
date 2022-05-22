@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragment.MypageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="마이페이지" />
-
-</FrameLayout>
-=======
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    >
 
     <TextView
         android:id="@+id/txt_mypage"
@@ -62,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_marginStart="20dp"
-            android:text="하연님 안녕하세요!"
+            android:text="회원님 안녕하세요!"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="#5b5b72"
@@ -105,15 +91,16 @@
             <ImageView
                 android:background="@drawable/ic_mypage2"
                 android:layout_gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 />
 
             <android.widget.Button
+                android:id="@+id/MypageMain_btn1"
                 android:layout_width="270dp"
                 android:layout_height="48dp"
                 android:text="찜한 장소"
-                android:textColor="@color/black"
+                android:textColor="#181D27"
                 android:textStyle="bold"
                 android:gravity="start|center"
                 android:paddingStart="20dp"
@@ -138,15 +125,16 @@
             <ImageView
                 android:background="@drawable/ic_mypage2"
                 android:layout_gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 />
 
             <android.widget.Button
                 android:layout_width="270dp"
                 android:layout_height="48dp"
-                android:text="찜한 장소"
-                android:textColor="@color/black"
+                android:text="설정"
+                android:id="@+id/MypageMain_btn2"
+                android:textColor="#181D27"
                 android:textStyle="bold"
                 android:gravity="start|center"
                 android:paddingStart="20dp"
@@ -171,15 +159,16 @@
             <ImageView
                 android:background="@drawable/ic_mypage2"
                 android:layout_gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 />
 
             <android.widget.Button
                 android:layout_width="270dp"
                 android:layout_height="48dp"
-                android:text="찜한 장소"
-                android:textColor="@color/black"
+                android:text="1:1 문의"
+                android:id="@+id/MypageMain_btn3"
+                android:textColor="#181D27"
                 android:textStyle="bold"
                 android:gravity="start|center"
                 android:paddingStart="20dp"
@@ -204,15 +193,16 @@
             <ImageView
                 android:background="@drawable/ic_mypage2"
                 android:layout_gravity="center"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 />
 
             <android.widget.Button
                 android:layout_width="270dp"
                 android:layout_height="48dp"
-                android:text="찜한 장소"
-                android:textColor="@color/black"
+                android:text="로그아웃"
+                android:id="@+id/MypageMain_btn4"
+                android:textColor="#181D27"
                 android:textStyle="bold"
                 android:gravity="start|center"
                 android:paddingStart="20dp"
@@ -226,17 +216,8 @@
 
         </LinearLayout>
         //
-
-
-
-
-
 
 
     </LinearLayout>
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
