@@ -56,7 +56,7 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
 
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
     MapPoint.GeoCoordinate mapPointGeo;
-    String search, placeName;
+    String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

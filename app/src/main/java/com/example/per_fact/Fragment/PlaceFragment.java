@@ -1,64 +1,101 @@
-package com.example.per_fact;
+package com.example.per_fact.Fragment;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PlaceFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.per_fact.Data.PlaceData;
+import com.example.per_fact.Adapter.MainViewAdapter;
+import com.example.per_fact.Data.Location;
+import com.example.per_fact.R;
+import com.example.per_fact.RetrofitNet;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PlaceFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    Button search_location;
+    EditText et_keyword;
+    String search;
+    ArrayList<PlaceData> list = new ArrayList<>();
+    RecyclerView recyclerView;
+    ImageView heart;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public PlaceFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PlaceFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PlaceFragment newInstance(String param1, String param2) {
-        PlaceFragment fragment = new PlaceFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    private MainViewAdapter adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_place, container, false);
+        View v = inflater.inflate(R.layout.fragment_place, container, false);
+
+
+        search_location = v.findViewById(R.id.search_location);
+        et_keyword = v.findViewById(R.id.et_keyword);
+        heart = v.findViewById(R.id.iv_heart);
+
+        //리싸이클러뷰 정의
+        recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        adapter = new MainViewAdapter(getActivity(), list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
+
+        listener();
+        return v;
+    }
+    private void listener() {
+        search_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search = et_keyword.getText().toString();
+
+                if(search != null) {
+                    Call<Location> call = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(search, "KakaoAK b7da65cd26d1be7fe973d194db579efd");
+                    call.enqueue(new Callback<Location>() {
+                        @Override
+                        public void onResponse(Call<Location> call, Response<Location> response) {
+                            if(response.isSuccessful()) {
+                                if(response.body() != null) {
+                                    for(int i = 0; i < response.body().documentsList.size(); i++) {
+                                        Log.i("sooyeon", "가게 이름" + response.body().documentsList.get(i).getCategory_name());
+                                        Log.i("sooyeon", "전화번호" + response.body().documentsList.get(i).getPhone());
+                                        Log.i("sooyeon", "장소 이름" + response.body().documentsList.get(i).getPlace_name());
+                                        Log.i("sooyeon", "도로명주소" + response.body().documentsList.get(i).getRoad_address_name());
+                                        recyclerView.setVisibility(View.VISIBLE);
+                                        list.add(new PlaceData(response.body().documentsList.get(i).getPlace_name(), response.body().documentsList.get(i).getCategory_name(), response.body().documentsList.get(i).getRoad_address_name(), response.body().documentsList.get(i).getPhone()));
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Location> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
     }
 }
