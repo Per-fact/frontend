@@ -22,10 +22,7 @@
             android:exported="true" >
         </activity>
         <activity
-            android:name=".Activity.CheckListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.CheckListActivity"
+            android:name=".CheckListActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"
@@ -36,17 +33,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.OfficeActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity android:name=".Activity.ScheduleActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity android:name=".Activity.CompleteActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
       
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
-            android:exported="true">
-        </activity>
 
 
 <!--        마이페이지액티비티들선언-->

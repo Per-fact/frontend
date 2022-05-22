@@ -78,10 +78,6 @@ public class PlaceFragment extends Fragment {
                             if(response.isSuccessful()) {
                                 if(response.body() != null) {
                                     for(int i = 0; i < response.body().documentsList.size(); i++) {
-                                        Log.i("sooyeon", "가게 이름" + response.body().documentsList.get(i).getCategory_name());
-                                        Log.i("sooyeon", "전화번호" + response.body().documentsList.get(i).getPhone());
-                                        Log.i("sooyeon", "장소 이름" + response.body().documentsList.get(i).getPlace_name());
-                                        Log.i("sooyeon", "도로명주소" + response.body().documentsList.get(i).getRoad_address_name());
                                         recyclerView.setVisibility(View.VISIBLE);
                                         list.add(new PlaceData(response.body().documentsList.get(i).getPlace_name(), response.body().documentsList.get(i).getCategory_name(), response.body().documentsList.get(i).getRoad_address_name(), response.body().documentsList.get(i).getPhone()));
                                     }

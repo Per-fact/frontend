@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PlaceFragment">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:padding="10dp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -81,65 +80,4 @@
         android:padding="15dp"
         android:overScrollMode="never"
         android:visibility="invisible"/>
-
-
-</LinearLayout>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="양식"
-                    android:textSize="13dp"/>
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="200dp"
-                    android:src="@drawable/heart" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/location"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="서울 노원구 공릉로 112 1층 (공릉동)"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/call"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
 </LinearLayout>

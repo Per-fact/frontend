@@ -56,7 +56,8 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
 
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
     MapPoint.GeoCoordinate mapPointGeo;
-    String search;
+    String search, placeName;
+    int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,12 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
             }
         });
 
+        if (!checkLocationServicesStatus()) {
+            showDialogForLocationServiceSetting();
+        } else {
+            checkRunTimePermission();
+        }
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,15 +98,12 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
                         public void onResponse(Call<Location> call, Response<Location> response) {
                             if (response.isSuccessful()) {
                                 if (response.body() != null) {
-                                    for (int i = 0; i < response.body().documentsList.size(); i++) {
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getPlace_name());
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getCategory_name());
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getX());
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getY());
+                                    for (i = 0; i < response.body().documentsList.size(); i++) {
                                         //마커 찍기
-                                        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633);
+                                        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(response.body().documentsList.get(i).getY(), response.body().documentsList.get(i).getX());
                                         MapPOIItem marker = new MapPOIItem();
 
+                                        placeName = response.body().documentsList.get(0).getPlace_name();
                                         marker.setItemName(response.body().documentsList.get(i).getPlace_name());
                                         marker.setTag(0);
                                         marker.setMapPoint(MARKER_POINT);
@@ -107,12 +111,11 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
                                         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
                                         mapView.addPOIItem(marker);
                                         // 줌 레벨 변경
-                                        mapView.setZoomLevel(7, true);
-
+                                        mapView.setZoomLevel(6, true);
+                                        et_home.setText(placeName);
                                         mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
                                             @Override
                                             public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-                                                et_home.setText("우리 집");
                                                 tv_complete.setVisibility(View.VISIBLE);
                                                 btnAdmin.setVisibility(View.VISIBLE);
 
@@ -127,19 +130,16 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
 
                                             @Override
                                             public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-                                                Toast.makeText(MapsActivity.this, "2 선택되었습니다", Toast.LENGTH_SHORT).show();
 
                                             }
 
                                             @Override
                                             public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
-                                                Toast.makeText(MapsActivity.this, "3 선택되었습니다", Toast.LENGTH_SHORT).show();
 
                                             }
 
                                             @Override
                                             public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
-                                                Toast.makeText(MapsActivity.this, "4 선택되었습니다", Toast.LENGTH_SHORT).show();
 
                                             }
                                         });
@@ -302,7 +302,6 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
     //GPS 활성화를 위한 메소드
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }

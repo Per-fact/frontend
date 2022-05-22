@@ -58,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
-                android:background="#D1DCEF"
                 android:layout_marginRight="5dp"
+                android:background="#CBDBF6"
                 android:src="@drawable/search" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:text="주소 확인 후 회사 등록을 완료하세요!"
                 android:textColor="@color/white"
                 android:textSize="15dp"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnAdmin2"
@@ -80,10 +80,10 @@
                 android:layout_below="@+id/btnSearch2"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="20dp"
-                android:text="집 등록하기"
                 android:background="@drawable/shape"
+                android:text="회사 등록하기"
                 android:textColor="@color/white"
-                android:visibility="invisible"/>
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>

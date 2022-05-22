@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-//import com.example.per_fact.Fragment.HomeFragment;
-//import com.example.per_fact.Fragment.MypageFragment;
-//import com.example.per_fact.Fragment.PlaceFragment;
+import com.example.per_fact.Fragment.PlaceFragment;
 import com.example.per_fact.Fragment.RoadFragment;
 import com.example.per_fact.HomeFragment;
 import com.example.per_fact.MypageFragment;
-import com.example.per_fact.PlaceFragment;
+import com.example.per_fact.Fragment.PlaceFragment;
 import com.example.per_fact.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

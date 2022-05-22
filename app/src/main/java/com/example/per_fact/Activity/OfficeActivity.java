@@ -70,14 +70,11 @@ public class OfficeActivity extends AppCompatActivity implements MapView.Current
                             if (response.isSuccessful()) {
                                 if (response.body() != null) {
                                     for (int i = 0; i < response.body().documentsList.size(); i++) {
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getPlace_name());
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getCategory_name());
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getX());
-                                        Log.i("sooyeon", "[GET] getAddressList : " + response.body().documentsList.get(i).getY());
                                         //마커 찍기
-                                        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633);
+                                        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(response.body().documentsList.get(i).getY(), response.body().documentsList.get(i).getX());
                                         MapPOIItem marker = new MapPOIItem();
 
+                                        placeName = response.body().documentsList.get(0).getPlace_name();
                                         marker.setItemName(response.body().documentsList.get(i).getPlace_name());
                                         marker.setTag(0);
                                         marker.setMapPoint(MARKER_POINT);
@@ -86,14 +83,12 @@ public class OfficeActivity extends AppCompatActivity implements MapView.Current
                                         mapView.addPOIItem(marker);
                                         // 줌 레벨 변경
                                         mapView.setZoomLevel(7, true);
-
+                                        et_building.setText(response.body().documentsList.get(i).getPlace_name());
                                         mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
                                             @Override
                                             public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-                                                et_building.setText("회사");
                                                 tv_complete2.setVisibility(View.VISIBLE);
                                                 btnAdmin2.setVisibility(View.VISIBLE);
-
                                                 btnAdmin2.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View view) {
@@ -105,20 +100,14 @@ public class OfficeActivity extends AppCompatActivity implements MapView.Current
 
                                             @Override
                                             public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-                                                Toast.makeText(OfficeActivity.this, "2 선택되었습니다", Toast.LENGTH_SHORT).show();
-
                                             }
 
                                             @Override
                                             public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
-                                                Toast.makeText(OfficeActivity.this, "3 선택되었습니다", Toast.LENGTH_SHORT).show();
-
                                             }
 
                                             @Override
                                             public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
-                                                Toast.makeText(OfficeActivity.this, "4 선택되었습니다", Toast.LENGTH_SHORT).show();
-
                                             }
                                         });
                                     }
