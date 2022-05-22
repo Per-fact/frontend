@@ -62,16 +62,6 @@ public class PlaceFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         listener();
-//        heart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int j = 1;
-//                heart.setImageResource(ImageId[j]);
-//                if(j == ImageId.length) {
-//                    j=0;
-//                }
-//            }
-//        });
         return v;
     }
     private void listener() {

@@ -6,9 +6,15 @@ android {
     compileSdk 32
 
     defaultConfig {
+<<<<<<< HEAD
         applicationId "com.example.per_fact"
         minSdk 21
         targetSdk 29
+=======
+        applicationId "org.techtown.per_fact"
+        minSdk 30
+        targetSdk 32
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
         versionCode 1
         versionName "1.0"
 
@@ -25,6 +31,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+<<<<<<< HEAD
     buildFeatures {
         viewBinding true
     }
@@ -47,12 +54,26 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0-rc01'
     //Google Play Service - Location API
     implementation "com.google.android.gms:play-services-location:17.0.0"
+=======
+}
+
+dependencies {
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.google.android.material:material:1.4.0.'
+    implementation 'com.google.android.material:material:1.0.0-rc01'
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+<<<<<<< HEAD
     implementation 'androidx.navigation:navigation-fragment:2.4.2'
     implementation 'androidx.navigation:navigation-ui:2.4.2'
+=======
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+>>>>>>> d31d72f4d40f41b974715a8d6b944c08c3031110
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
