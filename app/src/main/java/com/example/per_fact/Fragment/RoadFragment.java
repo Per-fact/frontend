@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.per_fact.Activity.MapsActivity;
+import com.example.per_fact.Activity.OfficeActivity;
 import com.example.per_fact.Activity.ScheduleActivity;
 import com.example.per_fact.R;
 
@@ -69,6 +70,14 @@ public class RoadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnBuilding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), OfficeActivity.class);
                 startActivity(intent);
             }
         });
