@@ -1,22 +1,27 @@
 package com.example.per_fact;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,21 +30,39 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.per_fact.Calendar.EventDecorator;
+import com.example.per_fact.Calendar.OneDayDecorator;
+import com.example.per_fact.Calendar.SaturdayDecorator;
+import com.example.per_fact.Calendar.SundayDecorator;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
+import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.threeten.bp.DayOfWeek;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private ArrayList<com.example.per_fact.CheckListDictionary> mArrayList;
+    private MaterialCalendarView calendarView;
+    private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
     CheckBox checkBox0;
     CheckBox checkBox1;
@@ -61,6 +84,7 @@ public class HomeFragment extends Fragment {
     ImageView ic_weather;
     TextView current_tmp;
     TextView txt_weather;
+    TextView txt_clothing;
 
     //상단 날짜 출력바
     long mNow;
@@ -81,6 +105,7 @@ public class HomeFragment extends Fragment {
         ic_weather = (ImageView)v.findViewById(R.id.ic_weather);
         current_tmp = (TextView) v.findViewById(R.id.txt_current_tmp);
         txt_weather = (TextView) v.findViewById(R.id.txt_weather);
+        txt_clothing = (TextView) v.findViewById(R.id.txt_clothing);
 
         btn_checkList_add = (ImageButton) v.findViewById(R.id.check_add_button);
         checkBox0 = (CheckBox) v.findViewById(R.id.checkBox0);
@@ -94,6 +119,8 @@ public class HomeFragment extends Fragment {
         checkBox8 = (CheckBox) v.findViewById(R.id.checkBox8);
         checkBox9 = (CheckBox) v.findViewById(R.id.checkBox9);
 
+        calendarView = (MaterialCalendarView) v.findViewById(R.id.calendarView);
+
 
         //상단 텍스트바 날짜 출력
         TextView mTextView = v.findViewById(R.id.date_View);
@@ -105,31 +132,8 @@ public class HomeFragment extends Fragment {
         }
         CurrentCall();
 
-
-        //주간 스케줄 펼치기 버튼
-        btn_week_schedule_open.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_week_schedule_open.setVisibility(btn_week_schedule_open.GONE);
-                btn_week_schedule_close.setVisibility(btn_week_schedule_close.VISIBLE);
-
-                week_schedule_item2.setVisibility(week_schedule_item2.VISIBLE);
-            }
-        });
-        //주간 스케줄 단기 버튼
-        btn_week_schedule_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_week_schedule_open.setVisibility(btn_week_schedule_open.VISIBLE);
-                btn_week_schedule_close.setVisibility(btn_week_schedule_close.GONE);
-
-                week_schedule_item2.setVisibility(week_schedule_item2.GONE);
-            }
-        });
-
-        mArrayList = new ArrayList<>();
-
         //체크리스트 추가 버튼 눌렀을 때 체크리스트액티비티 변환
+        mArrayList = new ArrayList<>();
         btn_checkList_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,6 +194,59 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //달력//
+
+        // 첫 시작 요일이 월요일이 되도록 설정
+        calendarView.state()
+                .edit()
+                .setFirstDayOfWeek(DayOfWeek.of(Calendar.SATURDAY))
+                .commit();
+
+        // 월, 요일을 설정한값으로 보이게 설정 (MonthArrayTitleFormatter의 작동을 확인하려면 밑의 setTitleFormatter()를 지운다)
+//        calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
+        calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
+        //토요일 파랑, 일요일 빨강으로 보이게 + 현재날짜 표시
+        calendarView.addDecorators(
+                new SundayDecorator(),
+                new SaturdayDecorator(),
+                new OneDayDecorator());
+        // 일자 선택 시 내가 정의한 드로어블이 적용되도록 한다
+        calendarView.addDecorators(new DayDecorator(getActivity().getApplicationContext()));
+
+
+//        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+//            @Override
+//            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+//                calendarView.addDecorator(EventDecorator(Collections.singleton(date)));
+//            }
+//        });
+
+
+
+
+
+
+        //주간 스케줄 펼치기 버튼
+        btn_week_schedule_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_week_schedule_open.setVisibility(btn_week_schedule_open.GONE);
+                btn_week_schedule_close.setVisibility(btn_week_schedule_close.VISIBLE);
+
+                week_schedule_item2.setVisibility(week_schedule_item2.VISIBLE);
+            }
+        });
+        //주간 스케줄 단기 버튼
+        btn_week_schedule_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_week_schedule_open.setVisibility(btn_week_schedule_open.VISIBLE);
+                btn_week_schedule_close.setVisibility(btn_week_schedule_close.GONE);
+
+                week_schedule_item2.setVisibility(week_schedule_item2.GONE);
+            }
+        });
+
 
         return v;
     }//end of onCreateView
@@ -231,6 +288,22 @@ public class HomeFragment extends Fragment {
                     double tempDo = (Math.round((tempK.getDouble("temp")-273.15)*100)/100.0);
                     String tempDo_s = String.format("%.0f", tempDo);
                     current_tmp.setText(tempDo_s +  "°C");
+                    if (tempDo <= 4) {
+                        txt_clothing.setText("⊙ 패딩\n⊙ 기모 옷\n⊙ 히트텍\n");
+
+                    }
+                    if (4 < tempDo && tempDo <= 16) {
+                        txt_clothing.setText("⊙ 가디건\n⊙ 점퍼\n⊙ 트렌치코트\n");
+
+                    }
+                    if (16 < tempDo && tempDo <= 22) {
+                        txt_clothing.setText("⊙ 맨투맨\n⊙ 긴팔 티\n⊙ 블라우스\n");
+
+                    }
+                    if (23 <= tempDo) {
+                        txt_clothing.setText("⊙ 얇은 셔츠\n⊙ 린넨 옷\n⊙ 반팔\n");
+
+                    }
 
                     //날씨 아이콘 받기
                     JSONArray weather_object = jsonObject.getJSONArray("weather");
@@ -342,12 +415,95 @@ public class HomeFragment extends Fragment {
                         break;
                 }
             }
-
-
-
-
-
         }
     }
+
+    /* 선택된 요일의 background를 설정하는 Decorator 클래스 */
+    private static class DayDecorator implements DayViewDecorator {
+
+        private final Drawable drawable;
+
+        public DayDecorator(Context context) {
+            drawable = ContextCompat.getDrawable(context, R.drawable.calendar_selector);
+        }
+
+        // true를 리턴 시 모든 요일에 내가 설정한 드로어블이 적용된다
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return true;
+        }
+
+        // 일자 선택 시 내가 정의한 드로어블이 적용되도록 한다
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.setSelectionDrawable(drawable);
+//            view.addSpan(new StyleSpan(Typeface.BOLD));   // 달력 안의 모든 숫자들이 볼드 처리됨
+        }
+    }
+
+
+
+// https://59595959.tistory.com/4
+//    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+//
+//        String[] Time_Result;
+//
+//        ApiSimulator(String[] Time_Result) {
+//            this.Time_Result = Time_Result;
+//        }
+//
+//        @Override
+//        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            Calendar calendar = Calendar.getInstance();
+//            ArrayList<CalendarDay> dates = new ArrayList<>();
+//
+//
+//            /*특정날짜 달력에 점표시해주는곳*/
+//            /*월은 0이 1월 년,일은 그대로*/
+//            //string 문자열인 Time_Result 을 받아와서 ,를 기준으로 짜르고 string을 int 로 변환
+//            for (int i = 0; i < Time_Result.length; i++) {
+//
+//
+//                //이부분에서 day를 선언하면 초기 값에 오늘 날짜 데이터 들어간다.
+//                //오늘 날짜 데이터를 첫 번째 인자로 넣기 때문에 데이터가 하나씩 밀려 마지막 데이터는 표시되지 않고, 오늘 날짜 데이터가 표시 됨.
+//                // day선언 주석처리
+//
+//                //                CalendarDay day = CalendarDay.from(calendar);
+//                //                Log.e("데이터 확인","day"+day);
+//                String[] time = Time_Result[i].split(",");
+//
+//                int year = Integer.parseInt(time[0]);
+//                int month = Integer.parseInt(time[1]);
+//                int dayy = Integer.parseInt(time[2]);
+//
+//                //선언문을 아래와 같은 위치에 선언
+//                //먼저 .set 으로 데이터를 설정한 다음 CalendarDay day = CalendarDay.from(calendar); 선언해주면 첫 번째 인자로 새로 정렬한 데이터를 넣어 줌.
+//                calendar.set(year, month - 1, dayy);
+//                CalendarDay day = CalendarDay.from(calendar);
+//                dates.add(day);
+//
+//            }
+//
+//
+//            return dates;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(@NonNull List<Calendarday> calendarDays) {
+//            super.onPostExecute(CalendarDays);
+//
+//            if (isFinishing()) {
+//                return;
+//            }
+//
+//            materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays));        }
+//    }
+
 
 }

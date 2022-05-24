@@ -59,7 +59,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="110dp"
                     android:background="@drawable/white_background"
                     android:layout_weight="1"
                     >
@@ -99,40 +99,35 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="110dp"
                     android:background="@drawable/blue_background"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
                     >
-                    <ImageView
-                        android:id="@+id/ic_weather_clothing"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_margin="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/txt_clothing"
-                        />
+
                     <TextView
                         android:id="@+id/txt_clothing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="시원한 원피스, 반팔 티셔츠"
-                        android:textSize="10dp"
+                        android:textSize="12dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ic_weather_clothing"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/txt_clothing1"/>
+
                     <TextView
+                        android:id="@+id/txt_clothing1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="추천합니다!"
-                        android:textSize="10dp"
+                        android:text="오늘의 추천 옷차림"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
+                        android:layout_margin="10dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_clothing"/>
+                        app:layout_constraintTop_toTopOf="parent"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -149,7 +144,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/white_background"
+                android:background="@drawable/checklist_back"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/calendarView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -343,12 +338,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <CalendarView
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                 android:id="@+id/calendarView"
+
+                app:mcv_selectionMode="range"
+
                 android:layout_width="match_parent"
-                android:layout_height="263dp"
+                android:layout_height="390dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:paddingTop="20dp"
                 android:background="@drawable/white_background"
                 app:layout_constraintBottom_toTopOf="@id/today_schedule"
                 app:layout_constraintEnd_toEndOf="parent"
