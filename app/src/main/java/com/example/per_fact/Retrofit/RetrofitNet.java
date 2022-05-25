@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Retrofit;
 
 import com.example.per_fact.Api.AddrSearchService;
 

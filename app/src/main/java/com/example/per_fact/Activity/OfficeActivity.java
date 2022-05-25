@@ -1,8 +1,6 @@
 package com.example.per_fact.Activity;
 
-import android.Manifest;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.per_fact.Data.Location;
 import com.example.per_fact.R;
-import com.example.per_fact.RetrofitNet;
+import com.example.per_fact.Retrofit.RetrofitNet;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -63,7 +61,7 @@ public class OfficeActivity extends AppCompatActivity implements MapView.Current
                 search = et_building.getText().toString();
 
                 if (search != null) {
-                    Call<Location> call = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(search, "KakaoAK b7da65cd26d1be7fe973d194db579efd");
+                    Call<Location> call = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(search, "KakaoAK c6ca841b4aef918c0b7663d53e05fc5f");
                     call.enqueue(new Callback<Location>() { //검색 조건
                         @Override
                         public void onResponse(Call<Location> call, Response<Location> response) {
@@ -84,18 +82,20 @@ public class OfficeActivity extends AppCompatActivity implements MapView.Current
                                         // 줌 레벨 변경
                                         mapView.setZoomLevel(7, true);
                                         et_building.setText(response.body().documentsList.get(i).getPlace_name());
+                                        tv_complete2.setVisibility(View.VISIBLE);
+                                        btnAdmin2.setVisibility(View.VISIBLE);
+                                        btnAdmin2.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Toast.makeText(OfficeActivity.this, "회사 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                                                onBackPressed();
+                                            }
+                                        });
+
                                         mapView.setPOIItemEventListener(new MapView.POIItemEventListener() {
                                             @Override
                                             public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-                                                tv_complete2.setVisibility(View.VISIBLE);
-                                                btnAdmin2.setVisibility(View.VISIBLE);
-                                                btnAdmin2.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        Toast.makeText(OfficeActivity.this, "회사 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
-                                                        onBackPressed();
-                                                    }
-                                                });
+
                                             }
 
                                             @Override

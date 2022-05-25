@@ -59,10 +59,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/et_startStation"
-                    android:hint="성수역"
-                    android:padding="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/et_shape"/>
+                    android:background="@drawable/et_shape"
+                    android:hint="성수역"
+                    android:padding="10dp" />
             </RelativeLayout>
 
             <Button

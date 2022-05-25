@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.example.per_fact.Data.PlaceData;
 import com.example.per_fact.Adapter.MainViewAdapter;
 import com.example.per_fact.Data.Location;
 import com.example.per_fact.R;
-import com.example.per_fact.RetrofitNet;
+import com.example.per_fact.Retrofit.RetrofitNet;
 
 import java.util.ArrayList;
 
