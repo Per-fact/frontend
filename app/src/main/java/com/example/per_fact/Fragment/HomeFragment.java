@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.per_fact.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

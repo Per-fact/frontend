@@ -64,9 +64,6 @@
         <activity android:name=".Activity.MypageLogout"
             android:theme="@android:style/Theme.Dialog"/>
 
-        <activity android:name=".Activity.NaverMapsActivity">
-        </activity>
-
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
