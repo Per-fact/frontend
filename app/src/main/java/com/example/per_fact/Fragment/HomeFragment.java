@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -39,6 +39,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import com.example.per_fact.Activity.MainActivity;
 import com.example.per_fact.Calendar.EventDecorator;
 import com.example.per_fact.Calendar.OneDayDecorator;
@@ -51,6 +52,8 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
+
+import com.example.per_fact.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

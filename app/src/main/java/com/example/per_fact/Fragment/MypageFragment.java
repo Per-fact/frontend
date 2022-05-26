@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.example.per_fact.Activity.MypageAsk;
 import com.example.per_fact.Activity.MypageLogout;
 import com.example.per_fact.Activity.MypageSetting;
+import com.example.per_fact.R;
 
 
 public class MypageFragment extends Fragment {

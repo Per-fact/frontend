@@ -18,10 +18,14 @@ public class Location {
         private String place_name;
         @SerializedName("category_name")
         private String category_name;
+        @SerializedName("phone")
+        private String phone;
+        @SerializedName("road_address_name")
+        private String road_address_name;
         @SerializedName("x")        //longitude
-        private String x;
+        private Double x;
         @SerializedName("y")        //latitude
-        private String y;
+        private Double y;
 
         public String getPlace_name() {
             return place_name;
@@ -39,19 +43,35 @@ public class Location {
             this.category_name = category_name;
         }
 
-        public String getX() {
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getRoad_address_name() {
+            return road_address_name;
+        }
+
+        public void setRoad_address_name(String road_address_name) {
+            this.road_address_name = road_address_name;
+        }
+
+        public Double getX() {
             return x;
         }
 
-        public void setX(String x) {
+        public void setX(Double x) {
             this.x = x;
         }
 
-        public String getY() {
+        public Double getY() {
             return y;
         }
 
-        public void setY(String y) {
+        public void setY(Double y) {
             this.y = y;
         }
     }

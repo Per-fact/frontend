@@ -74,7 +74,8 @@
                 android:text="주소 확인 후 집 등록을 완료하세요!"
                 android:textColor="@color/white"
                 android:textSize="15dp"
-                android:visibility="invisible" />
+                android:visibility="gone"/>
+
 
             <Button
                 android:id="@+id/btnAdmin"
@@ -87,7 +88,7 @@
                 android:textStyle="bold"
                 android:background="@drawable/shape"
                 android:textColor="@color/white"
-                android:visibility="invisible"/>
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>

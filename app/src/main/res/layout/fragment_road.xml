@@ -13,8 +13,8 @@
         android:orientation="vertical"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginTop="20dp"
@@ -41,6 +41,7 @@
                 />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,6 +74,7 @@
                     android:textSize="16dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/blue_background"/>
+
             </RelativeLayout>
 
             <ImageButton
@@ -146,146 +148,11 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape"
-                    android:padding="4dp"
-                    android:layout_gravity="start"
-                    android:text="전체 %s분"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnBus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@drawable/bus"
-                    android:textSize="12dp"
-                    android:text="%s분" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSubway"
-                    android:layout_width="93dp"
-                    android:layout_height="54dp"
-                    android:layout_column="3"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@drawable/subway"
-                    android:text="%s분"
-                    android:textSize="12dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnTotal"
-                    android:layout_width="110dp"
-                    android:layout_height="54dp"
-                    android:layout_column="4"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@drawable/sum"
-                    android:text="%s분"
-                    android:textSize="12dp" />
-            </TableRow>
-        </TableLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="213dp"
-            android:layout_margin="10dp"
-            >
-
-            <TextView
-                android:id="@+id/optimum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="최적"
-                android:textStyle="bold"
-                android:textColor="#4989E8" />
-
-            <TextView
-                android:id="@+id/tv_min"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/optimum"
-                android:text="3O분"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/tv_startStation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_min"
-                android:layout_marginTop="10dp"
-                android:textColor="#5b5b72"
-                android:text="태릉입구역" />
-
-            <TextView
-                android:id="@+id/tv_midStation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_startStation"
-                android:layout_marginTop="20dp"
-                android:textColor="#5b5b72"
-                android:text="건대입구역1번출구" />
-
-            <TextView
-                android:id="@+id/tv_busNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_midStation"
-                android:textColor="#5b5b72"
-                android:text="2016" />
-
-            <TextView
-                android:id="@+id/tv_EndStation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_busNumber"
-                android:paddingTop="10dp"
-                android:textColor="#5b5b72"
-                android:text="성수역1번출구 정류장" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSelect"
-                android:layout_width="wrap_content"
-                android:layout_height="37dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="106dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginBottom="41dp"
-                android:layout_toEndOf="@+id/tv_EndStation"
-                android:background="@drawable/shape"
-                android:padding="10dp"
-                android:text="경로 선택하기"
-                android:textStyle="bold"
-                android:textColor="@color/white" />
-        </RelativeLayout>
-    </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:overScrollMode="never"
+        android:visibility="invisible"/>
 </LinearLayout>
