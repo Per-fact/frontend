@@ -1,6 +1,8 @@
 package com.example.per_fact.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,7 +13,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.per_fact.Api.BookMarkService;
+import com.example.per_fact.Data.BookmarkCompany;
+import com.example.per_fact.Data.BookmarkHome;
 import com.example.per_fact.Data.Location;
+import com.example.per_fact.Data.LoginData;
 import com.example.per_fact.R;
 import com.example.per_fact.Retrofit.RetrofitNet;
 
@@ -23,6 +29,8 @@ import net.daum.mf.map.api.MapView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OfficeActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener{
 
@@ -87,8 +95,42 @@ public class OfficeActivity extends AppCompatActivity implements MapView.Current
                                         btnAdmin2.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                Toast.makeText(OfficeActivity.this, "회사 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
-                                                onBackPressed();
+
+                                                //retrofit 객체 생성
+                                                Retrofit retrofit = new Retrofit.Builder()
+                                                        .baseUrl("http://34.64.220.224:8080/")
+                                                        .addConverterFactory(GsonConverterFactory.create())
+                                                        .build();
+
+                                                BookMarkService bookMarkService = retrofit.create(BookMarkService.class);
+                                                double x = response.body().documentsList.get(0).getX();
+                                                double y = response.body().documentsList.get(0).getY();
+
+
+                                                BookmarkCompany bookmarkCompany = new BookmarkCompany(1,y,x,placeName);
+
+                                                bookMarkService.addCompany(bookmarkCompany).enqueue(new Callback<BookmarkCompany>() {
+                                                    @Override
+                                                    public void onResponse(Call<BookmarkCompany> call, Response<BookmarkCompany> response) {
+                                                        if(response.isSuccessful()) {
+                                                            if(response.body() != null) {
+                                                                Toast.makeText(OfficeActivity.this, "회사 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                                                                onBackPressed();
+                                                            }
+                                                        }else {
+                                                            Log.i("TEST", "error");
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<BookmarkCompany> call, Throwable t) {
+                                                        Log.i("TEST", "실패");
+                                                    }
+
+                                                });
+
+
+
                                             }
                                         });
 

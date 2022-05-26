@@ -22,6 +22,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.per_fact.Api.BookMarkService;
+import com.example.per_fact.Data.BookmarkCompany;
+import com.example.per_fact.Data.BookmarkHome;
 import com.example.per_fact.Data.Location;
 import com.example.per_fact.R;
 import com.example.per_fact.Retrofit.RetrofitNet;
@@ -34,6 +37,8 @@ import net.daum.mf.map.api.MapView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
@@ -111,8 +116,43 @@ public class MapsActivity extends AppCompatActivity implements MapView.CurrentLo
                                         btnAdmin.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                Toast.makeText(MapsActivity.this, "집 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
-                                                onBackPressed();
+
+
+                                                //retrofit 객체 생성
+                                                Retrofit retrofit = new Retrofit.Builder()
+                                                        .baseUrl("http://34.64.220.224:8080/")
+                                                        .addConverterFactory(GsonConverterFactory.create())
+                                                        .build();
+
+                                                BookMarkService bookMarkService = retrofit.create(BookMarkService.class);
+                                                double x = response.body().documentsList.get(0).getX();
+                                                double y = response.body().documentsList.get(0).getY();
+
+
+                                                BookmarkHome bookmarkHome = new BookmarkHome(1,y,x,placeName);
+
+                                                bookMarkService.addHome(bookmarkHome).enqueue(new Callback<BookmarkHome>() {
+                                                    @Override
+                                                    public void onResponse(Call<BookmarkHome> call, Response<BookmarkHome> response) {
+                                                        if(response.isSuccessful()) {
+                                                            if(response.body() != null) {
+                                                                Toast.makeText(MapsActivity.this, "집 등록이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                                                                onBackPressed();
+                                                            }
+                                                        }else {
+                                                            Log.i("TEST", "error");
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<BookmarkHome> call, Throwable t) {
+                                                        Log.i("TEST", "실패");
+                                                    }
+
+                                                });
+
+
+
                                             }
                                         });
 
