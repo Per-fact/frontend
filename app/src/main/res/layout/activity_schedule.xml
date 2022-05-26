@@ -1,256 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="?attr/actionModeCloseDrawable"
-            android:background="@color/white"
-            android:layout_weight="2"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일정 등록"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:paddingLeft="10dp"
-            android:layout_weight="7"/>
-
-        <ImageButton
-            android:id="@+id/btnCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/check"
-            app:tint="#1C6BE2"
-            android:layout_weight="1"
-            android:background="@color/white"/>
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/et_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="일정 제목을 입력해주세요."
-        android:padding="20dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <ImageView
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                app:srcCompat="@drawable/calendar"
-                app:tint="#1C6BE2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="시작"
-                android:textSize="18dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:paddingBottom="15dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="종료"
-                android:textSize="18dp"
-                android:layout_marginBottom="15dp"
-                android:textColor="@color/black"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="종일"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="4">
-
-            <Button
-                android:id="@+id/startTime"
-                android:layout_width="270dp"
-                android:layout_height="40dp"
-                android:hint="일정 시작 시간을 선택해주세요."
-                android:paddingBottom="10dp"
-                android:textSize="18dp" />
-
-            <Button
-                android:id="@+id/endTime"
-                android:layout_width="270dp"
-                android:layout_height="40dp"
-                android:hint="일정 종료 시간을 선택해주세요."
-                android:textSize="18dp"
-                android:layout_marginBottom="8dp"/>
-
-            <ToggleButton
-                android:id="@+id/toggleBtn1"
-                android:layout_width="50dp"
-                android:layout_height="27dp"
-                android:background="@drawable/toggle_selector"
-                android:checked="false"
-                android:text=""
-                android:textColor="@color/white"
-                android:textOff="OFF"
-                android:textOn="ON" />
-
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            app:tint="#1C6BE2"
-            app:srcCompat="@drawable/clock"
-            android:layout_marginTop="10dp"/>
-
-        <Button
-            android:id="@+id/btnPrepare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="예상 준비 시간을 선택해주세요."
-            android:textSize="18dp"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            app:srcCompat="@drawable/alarm"
-            app:tint="#1C6BE2"
-            android:paddingRight="5dp"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_weight="6">
-            <TextView
+            <ImageButton
+                android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="준비 시작 시간 알림"
-                android:textSize="20dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_height="48dp"
+                android:src="?attr/actionModeCloseDrawable"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="이제 준비하셔야 할 시간이에요!"
-                android:layout_marginBottom="15dp"/>
+                android:text="일정 등록"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:layout_gravity="center"
+                android:layout_weight="7"/>
 
-            <TextView
+            <ImageButton
+                android:id="@+id/btnCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="외출 시간 알림"
-                android:textSize="20dp"
-                android:layout_marginBottom="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="준비를 마치셨나요? \n클릭해 교통정보를 확인해보세요!"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ToggleButton
-                android:id="@+id/toggleBtn2"
-                android:layout_width="50dp"
-                android:layout_height="27dp"
-                android:background="@drawable/toggle_selector"
-                android:checked="false"
-                android:text=""
-                android:textOff="OFF"
-                android:textOn="ON"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="50dp"/>
-
-            <ToggleButton
-                android:id="@+id/toggleBtn3"
-                android:layout_width="50dp"
-                android:layout_height="27dp"
-                android:background="@drawable/toggle_selector"
-                android:checked="false"
-                android:text=""
-                android:textOff="OFF"
-                android:textOn="ON"
-                android:textColor="@color/white"/>
+                android:src="@drawable/check"
+                android:layout_gravity="center"
+                app:tint="#1C6BE2"
+                android:background="@android:color/transparent"/>
 
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="25dp"
-            app:srcCompat="@drawable/memo"
-            app:tint="#1C6BE2"
-            android:layout_weight="1"/>
 
         <EditText
-            android:id="@+id/et_memo"
-            android:layout_width="wrap_content"
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="메모를 입력해주세요."
-            android:textSize="20dp"
-            android:layout_weight="9"/>
+            android:hint="일정 제목을 입력해주세요."
+            android:background="@android:color/transparent"
+            android:layout_margin="20dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    app:srcCompat="@drawable/uil_calender"
+                    android:layout_marginEnd="5dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시작"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="종료"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="종일"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:paddingTop="2dp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="4">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/startTime"
+                    android:layout_width="270dp"
+                    android:layout_height="40dp"
+                    android:hint="일정 시작 시간을 선택해주세요."
+                    android:background="@android:color/transparent"
+                    android:textSize="18dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/endTime"
+                    android:layout_width="270dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:hint="일정 종료 시간을 선택해주세요."
+                    android:textSize="18dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <ToggleButton
+                    android:id="@+id/toggleBtn1"
+                    android:layout_width="50dp"
+                    android:layout_height="27dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textOff="OFF"
+                    android:textOn="ON" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="10dp"
+                app:srcCompat="@drawable/clock"
+                android:layout_gravity="center"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPrepare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="예상 준비 시간을 선택해주세요."
+                android:textSize="18dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/alarm"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="11dp"
+
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_weight="6">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="준비 시작 시간 알림"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:hint="이제 준비하셔야 할 시간이에요!"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="외출 시간 알림"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:hint="준비를 마치셨나요? \n클릭해 교통정보를 확인해보세요!"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ToggleButton
+                    android:id="@+id/toggleBtn2"
+                    android:layout_width="50dp"
+                    android:layout_height="27dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff="OFF"
+                    android:textOn="ON"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="50dp"/>
+
+                <ToggleButton
+                    android:id="@+id/toggleBtn3"
+                    android:layout_width="50dp"
+                    android:layout_height="27dp"
+                    android:background="@drawable/toggle_selector"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff="OFF"
+                    android:textOn="ON"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/memo"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/et_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="메모를 추가해주세요(선택)"
+                android:background="@android:color/transparent"
+                android:textSize="18dp"
+                android:layout_marginStart="12dp"
+                android:layout_weight="9"/>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

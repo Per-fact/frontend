@@ -101,28 +101,28 @@ public class CheckListActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String strID = editTextID.getText().toString();
 
-                        //Api 호출(POST)
-                        CheckListData checkListData = new CheckListData(0, strID, "false");
-                        checkListService.postCheckList(checkListData).enqueue(new Callback<CheckListData>() {
-                            @Override
-                            public void onResponse(Call<CheckListData> call, Response<CheckListData> response) {
-                                CheckListData data = response.body();
-                                if (response.isSuccessful()) {
-                                    if (response.body() != null) {
-                                        Log.d("TEST", data.toString());
-                                    }
-                                } else {
-                                    Log.d("TEST", "error");
-                                }
-//                                Log.d("TEST", "Post 성공");
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<CheckListData> call, Throwable t) {
-
-                            }
-                        });
+//                        //Api 호출(POST)
+//                        CheckListData checkListData = new CheckListData(0, strID, "false");
+//                        checkListService.postCheckList(checkListData).enqueue(new Callback<CheckListData>() {
+//                            @Override
+//                            public void onResponse(Call<CheckListData> call, Response<CheckListData> response) {
+//                                CheckListData data = response.body();
+//                                if (response.isSuccessful()) {
+//                                    if (response.body() != null) {
+//                                        Log.d("TEST", data.toString());
+//                                    }
+//                                } else {
+//                                    Log.d("TEST", "error");
+//                                }
+////                                Log.d("TEST", "Post 성공");
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<CheckListData> call, Throwable t) {
+//
+//                            }
+//                        });
 
                         Boolean checked = false;
                         com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID,checked);
@@ -148,7 +148,27 @@ public class CheckListActivity extends AppCompatActivity {
                 data.putParcelableArrayListExtra("checklist", mArrayList);
                 setResult(0,data);
 
+                checkListService.getAllData(1).enqueue(new Callback<List<CheckListData>>() {
+                    @Override
+                    public void onResponse(Call<List<CheckListData>> call, Response<List<CheckListData>> response) {
+                        if (response.isSuccessful()) {
+                            List<CheckListData> data = response.body();
+                            Log.d("TEST", "성공");
+                            Log.d("TEST", data.get(0).getContent());
+                        }else{
+                            Log.d("TEST", "실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<CheckListData>> call, Throwable t) {
+
+                    }
+                });
+
+
                 finish();
+
 
             }
         });

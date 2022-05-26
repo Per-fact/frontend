@@ -9,30 +9,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4887E7"
+        android:background="#4989E8"
         android:orientation="vertical"
-        android:padding="15dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
             <ImageButton
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:background="#4887E7"
+                android:paddingEnd="20dp"
+                android:background="@android:color/transparent"
                 android:src="?attr/actionModeCloseDrawable"
+                android:layout_gravity="center"
                 app:tint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="지도"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="20dp"
-                android:paddingLeft="10dp"/>
+                android:textSize="24dp"
+                />
 
         </LinearLayout>
 
@@ -40,7 +46,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
             <RelativeLayout
                 android:layout_width="350dp"
@@ -50,8 +58,9 @@
                     android:id="@+id/et_startStation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_shape"
+                    android:background="@drawable/blue_background"
                     android:hint="현위치: 서울 노원구 공릉동 123"
+                    android:textSize="16dp"
                     android:padding="10dp" />
 
                 <EditText
@@ -61,31 +70,34 @@
                     android:layout_below="@id/et_startStation"
                     android:hint="성수역"
                     android:padding="10dp"
+                    android:textSize="16dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/et_shape"/>
+                    android:background="@drawable/blue_background"/>
             </RelativeLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/switchStation"
                 android:layout_width="20dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="3dp"
                 android:background="@drawable/toggle" />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <ImageButton
                 android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#4887E7"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
                 android:focusableInTouchMode="true"
-                android:paddingTop="5dp"
                 android:src="@drawable/home" />
 
             <TextView
@@ -94,17 +106,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_toRightOf="@id/btnHome"
-                android:padding="10dp"
+                android:gravity="bottom"
+                android:paddingTop="12dp"
                 android:text="집"
                 android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <ImageButton
                 android:id="@+id/btnBuilding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_toRightOf="@id/tvHome"
-                android:background="#4887E7"
+                android:background="@android:color/transparent"
                 android:focusableInTouchMode="true"
                 android:paddingTop="5dp"
                 android:src="@drawable/building" />
@@ -114,23 +127,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/btnBuilding"
-                android:padding="10dp"
+                android:paddingTop="12dp"
                 android:text="회사"
                 android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnRoadFind"
                 android:layout_width="wrap_content"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/shape"
-                android:drawableLeft="@drawable/road"
-                android:drawableTint="@color/white"
-                android:padding="5dp"
-                android:text="길찾기"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:paddingTop="6dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_btn_roadsearch"
+                android:background="@android:color/transparent"
+
+                 />
         </RelativeLayout>
     </LinearLayout>
 
@@ -143,7 +155,7 @@
         android:layout_weight="2"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:layout_margin="20dp">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -158,53 +170,60 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
-                    android:background="@drawable/shape"
-                    android:padding="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/shape"
+                    android:padding="4dp"
+                    android:layout_gravity="start"
                     android:text="전체 %s분"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnBus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
-                    android:background="@color/white"
-                    android:drawableLeft="@drawable/bus"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/bus"
+                    android:textSize="12dp"
                     android:text="%s분" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSubway"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="93dp"
+                    android:layout_height="54dp"
                     android:layout_column="3"
-                    android:background="@color/white"
-                    android:drawableLeft="@drawable/subway"
-                    android:text="%s분" />
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/subway"
+                    android:text="%s분"
+                    android:textSize="12dp" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="110dp"
+                    android:layout_height="54dp"
                     android:layout_column="4"
-                    android:background="@color/white"
-                    android:drawableLeft="@drawable/sum"
-                    android:text="%s분" />
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/sum"
+                    android:text="%s분"
+                    android:textSize="12dp" />
             </TableRow>
         </TableLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="213dp"
-            android:padding="20dp">
+            android:layout_margin="10dp"
+            >
 
             <TextView
                 android:id="@+id/optimum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="최적"
-                android:textColor="#4887E7" />
+                android:textStyle="bold"
+                android:textColor="#4989E8" />
 
             <TextView
                 android:id="@+id/tv_min"
@@ -212,6 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/optimum"
                 android:text="3O분"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -221,6 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_min"
                 android:layout_marginTop="10dp"
+                android:textColor="#5b5b72"
                 android:text="태릉입구역" />
 
             <TextView
@@ -229,6 +250,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_startStation"
                 android:layout_marginTop="20dp"
+                android:textColor="#5b5b72"
                 android:text="건대입구역1번출구" />
 
             <TextView
@@ -236,6 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_midStation"
+                android:textColor="#5b5b72"
                 android:text="2016" />
 
             <TextView
@@ -244,17 +267,23 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_busNumber"
                 android:paddingTop="10dp"
+                android:textColor="#5b5b72"
                 android:text="성수역1번출구 정류장" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginStart="106dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginBottom="41dp"
+                android:layout_toEndOf="@+id/tv_EndStation"
                 android:background="@drawable/shape"
                 android:padding="10dp"
                 android:text="경로 선택하기"
+                android:textStyle="bold"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </LinearLayout>

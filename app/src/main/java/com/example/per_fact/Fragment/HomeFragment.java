@@ -103,6 +103,8 @@ public class HomeFragment extends Fragment {
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
 
+    int a=0,b=0,c=0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -139,7 +141,6 @@ public class HomeFragment extends Fragment {
         checkBox8 = (CheckBox) v.findViewById(R.id.checkBox8);
         checkBox9 = (CheckBox) v.findViewById(R.id.checkBox9);
         calendarView = (MaterialCalendarView) v.findViewById(R.id.calendarView);
-
 
         //상단 텍스트바 날짜 출력
         TextView mTextView = v.findViewById(R.id.date_View);
@@ -268,6 +269,7 @@ public class HomeFragment extends Fragment {
 
                                 break;
                             case R.id.menu2:
+                                a =1;
                                 week_schedule_item.setVisibility(View.GONE);
                                 Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
 
@@ -298,6 +300,7 @@ public class HomeFragment extends Fragment {
 
                                 break;
                             case R.id.menu2:
+                                b =1;
                                 week_schedule_item2.setVisibility(View.GONE);
                                 Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
 
@@ -328,6 +331,7 @@ public class HomeFragment extends Fragment {
 
                                 break;
                             case R.id.menu2:
+                                c = 1;
                                 week_schedule_item3.setVisibility(View.GONE);
                                 Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
 
@@ -340,32 +344,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        //주간 스케줄 펼치기 버튼
-        btn_week_schedule_open.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_week_schedule_open.setVisibility(btn_week_schedule_open.GONE);
-                btn_week_schedule_close.setVisibility(btn_week_schedule_close.VISIBLE);
-
-                week_schedule_item2.setVisibility(week_schedule_item2.VISIBLE);
-                week_schedule_item3.setVisibility(week_schedule_item3.VISIBLE);
-            }
-        });
-        //주간 스케줄 단기 버튼
-        btn_week_schedule_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_week_schedule_open.setVisibility(btn_week_schedule_open.VISIBLE);
-                btn_week_schedule_close.setVisibility(btn_week_schedule_close.GONE);
-
-                week_schedule_item2.setVisibility(week_schedule_item2.GONE);
-                week_schedule_item3.setVisibility(week_schedule_item3.GONE);
-            }
-        });
-
-
-
         return v;
     }//end of onCreateView
 

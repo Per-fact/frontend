@@ -44,6 +44,18 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/today_View" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="체크리스트를 확인하세요!"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/check_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/check_list"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="60dp"
+
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -373,7 +385,7 @@
                     android:id="@+id/today_schedule_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5.13(수)"
+                    android:text="5.28(토)"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/today_schedule_title"
                     app:layout_constraintEnd_toStartOf="@id/txt_today"
@@ -495,7 +507,7 @@
                         android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:background="@drawable/blue3_background"
-                        android:text="5.9 토"
+                        android:text="6.2 목"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -509,7 +521,7 @@
                             android:id="@+id/week_schedule_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="큐시즘의 밤"
+                            android:text="약속1"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -543,7 +555,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/week_schedule_date2"
@@ -552,7 +564,7 @@
                         android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:background="@drawable/blue3_background"
-                        android:text="5.9 토"
+                        android:text="6.3 금"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -566,7 +578,7 @@
                             android:id="@+id/week_schedule_title2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="큐시즘의 밤"
+                            android:text="미팅"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -600,7 +612,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/week_schedule_date3"
@@ -609,7 +621,7 @@
                         android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:background="@drawable/blue3_background"
-                        android:text="5.9 토"
+                        android:text="6.4 토"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -623,7 +635,7 @@
                             android:id="@+id/week_schedule_title3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="큐시즘의 밤"
+                            android:text="약속2"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -658,7 +670,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/btn_open"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <ImageButton
                     android:id="@+id/btn_week_schedule_close"
