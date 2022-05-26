@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Per_fact"
 include ':app'
-include ':ODsayAndroidSDK'

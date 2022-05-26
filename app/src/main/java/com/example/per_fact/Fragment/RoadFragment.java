@@ -18,13 +18,21 @@ import android.widget.TextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.per_fact.Activity.MapsActivity;
 import com.example.per_fact.Activity.ODsayBackend;
 import com.example.per_fact.Activity.OfficeActivity;
 import com.example.per_fact.Activity.ScheduleActivity;
+import com.example.per_fact.Adapter.MainViewAdapter;
+import com.example.per_fact.Adapter.RoadViewAdapter;
+import com.example.per_fact.Data.Location;
+import com.example.per_fact.Data.PlaceData;
+import com.example.per_fact.Data.RoadData;
 import com.example.per_fact.R;
 
+import com.example.per_fact.Retrofit.RetrofitNet;
 import com.odsay.odsayandroidsdk.API;
 
 import org.json.JSONArray;
@@ -33,6 +41,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RoadFragment extends Fragment {
@@ -43,20 +55,24 @@ public class RoadFragment extends Fragment {
     TextView tvHome, tvBuilding, total, tv_min, tv_busNumber, tv_startStation, tv_midStation, tv_endStation;
     //String APIKEY_ID = "ar7zysdloh";
     //String APIKEY = "MHEi%2FORnStzohsN6KcJhPoE4GgAiFnUu6gXHIQzb7F";
-    String start, end;
+    RecyclerView recyclerView;
+    ArrayList<RoadData> list2 = new ArrayList<>();
+    private RoadViewAdapter adapter;
+
     private LocationManager locationManager;
 
     //출발지 경도, 위도
-    public double longitude = 126.97790971650069;
-    public double latitude = 37.57069834711464;
+    public double longitude;
+    public double latitude;
 
     //도착지 경도, 위도
-    public double dst_longitude = 127.10048819629597;
-    public double dst_latitude = 37.514466827932594;
+    public double dst_longitude;
+    public double dst_latitude;
 
     JSONArray path = new JSONArray();
 
-
+    //path 변수
+    int time;
     public RoadFragment() {
         // Required empty public constructor
     }
@@ -92,6 +108,14 @@ public class RoadFragment extends Fragment {
         tv_startStation = v.findViewById(R.id.tv_startStation);
         tv_midStation = v.findViewById(R.id.tv_midStation);
         tv_endStation = v.findViewById(R.id.tv_EndStation);
+
+        //리싸이클러뷰 정의
+        recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        adapter = new RoadViewAdapter(getActivity(), list2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
+
 
         clickListener();
 
@@ -132,6 +156,9 @@ public class RoadFragment extends Fragment {
 
                 //ODsayAPI 호출
                 path = oDsayBackend.requestRoute(longitude, latitude, dst_longitude, dst_latitude);
+
+                String stringStartStation = startStation.getText().toString();
+                String stringEndStation = endStation.getText().toString();
 
                 //Log.d("ROUTE_PATH", path.toString());
 
@@ -176,7 +203,7 @@ public class RoadFragment extends Fragment {
 
                             }
                         }
-                        int time = path.getJSONObject(i).getJSONObject("info").getInt("totalTime");
+                        time = path.getJSONObject(i).getJSONObject("info").getInt("totalTime");
                         int pay = path.getJSONObject(i).getJSONObject("info").getInt("payment");
                         strpath.append("소요시간 : " + String.valueOf(time) + "분\n");
                         strpath.append("금액 : " + String.valueOf(pay) + "원\n");
@@ -193,6 +220,51 @@ public class RoadFragment extends Fragment {
                     Log.i("data", list.get(j));
                 }
 
+
+                if(stringStartStation != null && stringEndStation != null) {
+                    Call<Location> call = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(stringStartStation, "KakaoAK c6ca841b4aef918c0b7663d53e05fc5f");
+                    call.enqueue(new Callback<Location>() {
+                        @Override
+                        public void onResponse(Call<Location> call, Response<Location> response) {
+                            if (response.isSuccessful()) {
+                                if (response.body() != null) {
+                                    Log.i("출발지 longitude", response.body().documentsList.get(0).getX().toString());
+                                    Log.i("출발지 latitude", response.body().documentsList.get(0).getY().toString());
+                                    longitude = response.body().documentsList.get(0).getX();
+                                    latitude = response.body().documentsList.get(0).getY();
+                                    recyclerView.setVisibility(View.VISIBLE);
+//                                    list2.add(new RoadData());
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Location> call, Throwable t) {
+                            Log.i("출발지", "실패");
+                        }
+                    });
+
+                    Call<Location> call2 = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(stringEndStation, "KakaoAK c6ca841b4aef918c0b7663d53e05fc5f");
+                    call2.enqueue(new Callback<Location>() {
+                        @Override
+                        public void onResponse(Call<Location> call2, Response<Location> response) {
+                            if (response.isSuccessful()) {
+                                if (response.body() != null) {
+                                    Log.i("목적지 x", response.body().documentsList.get(0).getX().toString());
+                                    Log.i("목적지 y", response.body().documentsList.get(0).getY().toString());
+                                    dst_longitude = response.body().documentsList.get(0).getX();
+                                    dst_latitude = response.body().documentsList.get(0).getY();
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Location> call, Throwable t) {
+                                Log.i("목적지", "실패");
+                        }
+                    });
+                }
 
                 btnSelect.setOnClickListener(new View.OnClickListener() {
                     @Override
