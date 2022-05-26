@@ -12,11 +12,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.per_fact.Api.ScrapService;
 import com.example.per_fact.Data.PlaceData;
+import com.example.per_fact.Data.ScrapData;
 import com.example.per_fact.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainViewAdapter extends RecyclerView.Adapter<MainViewAdapter.Holder> {
     private Context context;
@@ -58,6 +66,14 @@ public class MainViewAdapter extends RecyclerView.Adapter<MainViewAdapter.Holder
     public class Holder extends RecyclerView.ViewHolder{
         TextView location, name, tel, category;
         ImageView heart;
+
+        //retrofit 객체 생성
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://34.64.220.224:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ScrapService scrapService = retrofit.create(ScrapService.class);
+
         public Holder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.tv_name);
@@ -66,16 +82,31 @@ public class MainViewAdapter extends RecyclerView.Adapter<MainViewAdapter.Holder
             tel = (TextView) itemView.findViewById(R.id.tv_tel);
             heart = (ImageView) itemView.findViewById(R.id.iv_heart);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            String stringName = name.getText().toString();
+            String stringAddr = location.getText().toString();
+            String stringTel = tel.getText().toString();
+            heart = (ImageView) itemView.findViewById(R.id.iv_heart);
+
+            heart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ImageView heart;
-                    heart = view.findViewById(R.id.iv_heart);
                     //스크랩 기능
-                    int [] ImageId = {R.drawable.heart, R.drawable.full_heart};
-                    int j = 1;
-                    heart.setImageResource(ImageId[j]);
-                    Log.i("sooyeon", "클릭됨");
+
+                    ScrapData scrap = new ScrapData(0, stringName, stringAddr, stringTel);
+                    scrapService.postData(scrap).enqueue(new Callback<ScrapData>() {
+                        @Override
+                        public void onResponse(Call<ScrapData> call, Response<ScrapData> response) {
+                            Log.i("sooyeon", response.toString());
+                            heart.setImageResource(R.drawable.full_heart);
+                            Toast.makeText(view.getContext(), "스크랩 되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ScrapData> call, Throwable t) {
+                            Log.i("sooyeon", "실패");
+                        }
+                    });
+
                 }
             });
         }

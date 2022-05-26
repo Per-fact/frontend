@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.per_fact" >
 
     <!-- 인터넷, 위치 권한 -->
@@ -9,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Per_fact"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
         <activity
             android:name=".Activity.MapsActivity"
             android:exported="true" >
@@ -27,39 +30,50 @@
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".Activity.IntroActivity"
+            android:exported="true" >
+        </activity>
+        <activity android:name=".Activity.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.OfficeActivity"
-            android:exported="true"/>
-        <activity android:name=".Activity.ScheduleActivity"
-            android:exported="true"/>
-        <activity android:name=".Activity.CompleteActivity"
-            android:exported="true"/>
-      
+        <activity
+            android:name=".Activity.OfficeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ScheduleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.CompleteActivity"
+            android:exported="true" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
 
 
-<!--        마이페이지액티비티들선언-->
+        <!--        마이페이지액티비티들선언-->
         <activity
             android:name=".Activity.MypageAsk"
             android:exported="true" />
         <activity
             android:name=".Activity.MypageSetting"
-            android:exported="true"/>
-        <activity android:name=".Activity.MypageLogout"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:exported="true" />
+        <activity
+            android:name=".Activity.MypageLogout"
+            android:theme="@android:style/Theme.Dialog" />
+
 
 
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
-
     </application>
 
 </manifest>
