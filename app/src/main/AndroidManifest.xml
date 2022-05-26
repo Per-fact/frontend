@@ -38,39 +38,42 @@
         <activity android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".Activity.OfficeActivity"
-            android:exported="true"/>
-        <activity android:name=".Activity.ScheduleActivity"
-            android:exported="true"/>
-        <activity android:name=".Activity.CompleteActivity"
-            android:exported="true"/>
-      
+        <activity
+            android:name=".Activity.OfficeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.ScheduleActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.CompleteActivity"
+            android:exported="true" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
 
 
-<!--        마이페이지액티비티들선언-->
+        <!--        마이페이지액티비티들선언-->
         <activity
             android:name=".Activity.MypageAsk"
             android:exported="true" />
         <activity
             android:name=".Activity.MypageSetting"
-            android:exported="true"/>
-        <activity android:name=".Activity.MypageLogout"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:exported="true" />
+        <activity
+            android:name=".Activity.MypageLogout"
+            android:theme="@android:style/Theme.Dialog" />
+
+
 
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/myappKey" />
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="ar7zysdloh" />
     </application>
 
 </manifest>
