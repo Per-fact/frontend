@@ -10,34 +10,14 @@ public class CheckListDictionary implements Parcelable {
     private String id;
     boolean isSelected;
 
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.isSelected = selected;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+    public CheckListDictionary(String id, boolean isSelected) {
         this.id = id;
+        this.isSelected = isSelected;
     }
 
-
-    public CheckListDictionary(String id) {
-        this.id = id;
-        this.isSelected = isSelected();
-
-    }
-
-    //
     protected CheckListDictionary(Parcel in) {
         id = in.readString();
-
+        isSelected = in.readByte() != 0;
     }
 
     public static final Creator<CheckListDictionary> CREATOR = new Creator<CheckListDictionary>() {
@@ -51,7 +31,22 @@ public class CheckListDictionary implements Parcelable {
             return new CheckListDictionary[size];
         }
     };
-    //
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     @Override
     public int describeContents() {
@@ -61,9 +56,6 @@ public class CheckListDictionary implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
-
-
+        parcel.writeByte((byte) (isSelected ? 1 : 0));
     }
-
-
 }

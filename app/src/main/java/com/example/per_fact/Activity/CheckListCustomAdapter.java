@@ -2,6 +2,7 @@ package com.example.per_fact;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,7 +22,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.per_fact.Api.CheckListService;
+import com.example.per_fact.Data.CheckListData;
+
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustomAdapter.CustomViewHolder> {
 
@@ -78,10 +88,15 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 item.setSelected(compoundButton.isChecked());
                 viewholder.mId.setSelected(compoundButton.isChecked());
-
             }
         });
         //
+        //Retrofit 객체 생성
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://34.64.220.224:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        CheckListService checkListService = retrofit.create(CheckListService.class);
 
         viewholder.mId.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
@@ -103,12 +118,10 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.menu1:
-                                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show(); //토스트로 실험
-
+                                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 
                                 // 다이얼로그를 보여주기 위해 edit_box.xml 파일을 사용합니다.
-
                                 View view_V = LayoutInflater.from(mContext)
                                         .inflate(R.layout.edit_box, null, false);
                                 builder.setView(view_V);
@@ -119,37 +132,46 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
 
                                 // 6. 해당 줄에 입력되어 있던 데이터를 불러와서 다이얼로그에 보여줍니다.
                                 editTextID.setText(mList.get(position).getId());
-
-
-
                                 final AlertDialog dialog = builder.create();
+
+                                // 7. 수정 버튼을 클릭하면 현재 UI에 입력되어 있는 내용으로
                                 ButtonSubmit.setOnClickListener(new View.OnClickListener() {
-
-
-                                    // 7. 수정 버튼을 클릭하면 현재 UI에 입력되어 있는 내용으로
 
                                     public void onClick(View v) {
                                         String strID = editTextID.getText().toString();
-
-                                        com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID);
-
-                                        //여기
-
+                                        Boolean checked = false;
+                                        com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID, checked);
 
                                         // 8. ListArray에 있는 데이터를 변경하고
                                         mList.set(position, dict);
 
 
                                         // 9. 어댑터에서 RecyclerView에 반영하도록 합니다.
-
                                         notifyItemChanged(position);
-
                                         dialog.dismiss();
+
+                                        //수정 API 호출(PUT)
+                                        int id = 6; //id 값을 가져와야함 예시일뿐
+                                        checkListService.putData(id).enqueue(new Callback<CheckListData>() {
+                                            @Override
+                                            public void onResponse(Call<CheckListData> call, Response<CheckListData> response) {
+                                                if (response.isSuccessful()) {
+                                                    Log.d("TEST PUT", "수정성공");
+                                                    Log.d("TEST PUT", response.toString());
+                                                    Log.d("TEST PUT", response.body().toString());
+                                                } else {
+                                                    Log.d("TEST PUT", "실패");
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<CheckListData> call, Throwable t) {
+
+                                            }
+                                        });
                                     }
                                 });
-
                                 dialog.show();
-
 
                                 break;
                             case R.id.menu2:
@@ -157,6 +179,25 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                                 mList.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position, mList.size());
+                                // API호출 DELETE
+                                int id = 6; //id값을 가져와야함 예시일뿐
+                                checkListService.putData(id).enqueue(new Callback<CheckListData>() {
+                                    @Override
+                                    public void onResponse(Call<CheckListData> call, Response<CheckListData> response) {
+                                        if (response.isSuccessful()) {
+                                            Log.d("TEST DELETE", "삭제성공");
+                                            Log.d("TEST PUT", response.toString());
+                                            Log.d("TEST DELETE", response.body().toString());
+                                        } else {
+                                            Log.d("TEST DELETE", "실패");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<CheckListData> call, Throwable t) {
+
+                                    }
+                                });
                                 break;
                         }
                         return false;
