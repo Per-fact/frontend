@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,10 +47,12 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
     }
 
     public CheckListCustomAdapter(Context context, ArrayList<CheckListDictionary> list) {
+
         mList = list;
         mContext = context;
 
     }
+
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -91,9 +95,11 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
         viewholder.mId.setText(mList.get(position).getId());
 
         //체크리스트 옵션버튼 클릭시
+
         viewholder.mOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 //옵션 팝업메뉴
                 PopupMenu popup= new PopupMenu(mContext.getApplicationContext(), view,Gravity.CENTER);
@@ -104,10 +110,12 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.menu1:
+
                                 Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 
                                 // 다이얼로그를 보여주기 위해 edit_box.xml 파일을 사용합니다.
+
                                 View view_V = LayoutInflater.from(mContext)
                                         .inflate(R.layout.edit_box, null, false);
                                 builder.setView(view_V);
@@ -125,8 +133,10 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                                         Boolean checked = false;
                                         CheckListDictionary dict = new CheckListDictionary(strID, checked);
 
+
                                         // 8. ListArray에 있는 데이터를 변경하고
                                         mList.set(position, dict);
+
 
                                         // 9. 어댑터에서 RecyclerView에 반영하도록 합니다.
                                         notifyItemChanged(position);
@@ -163,6 +173,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                                 notifyItemRemoved(position);
                                 notifyItemRangeChanged(position, mList.size());
 
+
                                 // API호출 DELETE
 //                                int id = 6; //id값을 가져와야함 예시일뿐
 //                                checkListService.putData(id).enqueue(new Callback<CheckListData>() {
@@ -180,6 +191,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
 //                                    public void onFailure(Call<CheckListData> call, Throwable t) {
 //                                    }
 //                                });
+
                                 break;
                         }
                         return false;
@@ -187,7 +199,9 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                 });
                 popup.show();
             }
+
         });
+
     }
 
     @Override
@@ -196,3 +210,6 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
     }
 
 }
+
+
+//checkListCustomAdapter

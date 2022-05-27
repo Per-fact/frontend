@@ -3,20 +3,21 @@ package com.example.per_fact.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -40,24 +41,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.example.per_fact.Activity.CompleteActivity;
-import com.example.per_fact.Activity.MainActivity;
-import com.example.per_fact.Activity.ScheduleActivity;
-import com.example.per_fact.Calendar.EventDecorator;
-import com.example.per_fact.Calendar.OneDayDecorator;
-import com.example.per_fact.Calendar.SaturdayDecorator;
-import com.example.per_fact.Calendar.SundayDecorator;
-import com.example.per_fact.Repository.CheckListDictionary;
-//import com.prolificinteractive.materialcalendarview.CalendarDay;
-//import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-//import com.prolificinteractive.materialcalendarview.DayViewFacade;
-//import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-//import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-//import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
-//import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
 
+import com.example.per_fact.Activity.CheckListActivity;
+import com.example.per_fact.Activity.CheckListDictionary;
+import com.example.per_fact.Activity.MainActivity;
+
+import com.example.per_fact.Activity.ScheduleActivity;
 import com.example.per_fact.R;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.datepicker.MaterialCalendar;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,11 +59,13 @@ import org.json.JSONObject;
 //import org.threeten.bp.DayOfWeek;
 //import org.w3c.dom.Text;
 
+
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +74,8 @@ import java.util.Map;
 
 public class HomeFragment extends Fragment {
     MainActivity mainActivity;
+
+
     // 메인 액티비티 위에 올린다.
     @Override
     public void onAttach(Context context) {
@@ -85,18 +83,23 @@ public class HomeFragment extends Fragment {
         mainActivity = (MainActivity) getActivity();
     }
 
+
     // 메인 액티비티에서 내려온다.
     @Override
     public void onDetach() {
         super.onDetach();
         mainActivity = null;
     }
+
+
     private ArrayList<CheckListDictionary> mArrayList;
-    private MaterialCalendarView calendarView;
-    private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
-    CheckBox checkBox0, checkBox1, checkBox2, checkBox3, checkBox4,checkBox5,checkBox6,checkBox7,checkBox8,checkBox9;
+    //private MaterialCalenderView calendarView;
+    //private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+
+    CheckBox checkBox0, checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9;
     ImageButton btn_checkList_add, btn_week_schedule_open, btn_week_schedule_close, today_schedule_btn_option,
-            week_schedule_btn_option,week_schedule_btn_option2,week_schedule_btn_option3, today_schedule_btn_traffic;
+            week_schedule_btn_option, week_schedule_btn_option2, week_schedule_btn_option3, today_schedule_btn_traffic;
+
     Button schedule_add_button;
     LinearLayout week_schedule_item, week_schedule_item2, week_schedule_item3;
     ConstraintLayout today_schedule;
@@ -117,20 +120,24 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        btn_week_schedule_open =(ImageButton)v.findViewById(R.id.btn_week_schedule_open);
-        btn_week_schedule_close =(ImageButton)v.findViewById(R.id.btn_week_schedule_close);
+
+        btn_week_schedule_open = (ImageButton) v.findViewById(R.id.btn_week_schedule_open);
+        btn_week_schedule_close = (ImageButton) v.findViewById(R.id.btn_week_schedule_close);
+
         today_schedule_btn_option = (ImageButton) v.findViewById(R.id.today_schedule_btn_option);
         btn_checkList_add = (ImageButton) v.findViewById(R.id.check_add_button);
         today_schedule_btn_traffic = (ImageButton) v.findViewById(R.id.today_schedule_btn_traffic);
         week_schedule_btn_option = (ImageButton) v.findViewById(R.id.week_schedule_btn_option);
         week_schedule_btn_option2 = (ImageButton) v.findViewById(R.id.week_schedule_btn_option2);
-        week_schedule_btn_option3 = (ImageButton) v.findViewById(R.id.week_schedule_btn_option3);
+
+        //week_schedule_btn_option3 = (ImageButton) v.findViewById(R.id.week_schedule_btn_option3);
         schedule_add_button = (Button) v.findViewById(R.id.schedule_add_button);
-        week_schedule_item = (LinearLayout) v.findViewById(R.id.week_schedule_item);
-        week_schedule_item2 =(LinearLayout)v.findViewById(R.id.week_schedule_item2);
-        week_schedule_item3 =(LinearLayout)v.findViewById(R.id.week_schedule_item3);
-        today_schedule =(ConstraintLayout)v.findViewById(R.id.today_schedule);
-        ic_weather = (ImageView)v.findViewById(R.id.ic_weather);
+        //week_schedule_item = (LinearLayout) v.findViewById(R.id.week_schedule_item);
+        week_schedule_item2 = (LinearLayout) v.findViewById(R.id.week_schedule_item2);
+        //week_schedule_item3 = (LinearLayout) v.findViewById(R.id.week_schedule_item3);
+        today_schedule = (ConstraintLayout) v.findViewById(R.id.today_schedule);
+        ic_weather = (ImageView) v.findViewById(R.id.ic_weather);
+
         current_tmp = (TextView) v.findViewById(R.id.txt_current_tmp);
         txt_weather = (TextView) v.findViewById(R.id.txt_weather);
         txt_clothing = (TextView) v.findViewById(R.id.txt_clothing);
@@ -144,14 +151,16 @@ public class HomeFragment extends Fragment {
         checkBox7 = (CheckBox) v.findViewById(R.id.checkBox7);
         checkBox8 = (CheckBox) v.findViewById(R.id.checkBox8);
         checkBox9 = (CheckBox) v.findViewById(R.id.checkBox9);
-        calendarView = (MaterialCalendarView) v.findViewById(R.id.calendarView);
+
+        //calendarView = (MaterialCalendarview) v.findViewById(R.id.calendarView);
+
 
         //상단 텍스트바 날짜 출력
         TextView mTextView = v.findViewById(R.id.date_View);
         mTextView.setText(getTime());
 
         //현재 서울 날씨 출력
-        if(requestQueue == null){
+        if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         }
         CurrentCall();
@@ -173,9 +182,208 @@ public class HomeFragment extends Fragment {
                 checkBox8.setVisibility(View.INVISIBLE);
                 checkBox9.setVisibility(View.INVISIBLE);
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.Activity.CheckListActivity.class);
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), CheckListActivity.class);
                 intent.putParcelableArrayListExtra("checklist", mArrayList);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
+            }
+        });
+        /*
+
+        //달력//
+
+        // 첫 시작 요일이 월요일이 되도록 설정
+        calendarView.state()
+                .edit()
+                .setFirstDayOfWeek(DayOfWeek.of(Calendar.SATURDAY))
+                .commit();
+
+        // 월, 요일을 설정한값으로 보이게 설정 (MonthArrayTitleFormatter의 작동을 확인하려면 밑의 setTitleFormatter()를 지운다)
+//        calendarView.setTitleFormatter(new MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)));
+        calendarView.setWeekDayFormatter(new ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)));
+        //토요일 파랑, 일요일 빨강으로 보이게 + 현재날짜 표시
+        calendarView.addDecorators(
+                new SundayDecorator(),
+                new SaturdayDecorator(),
+                new OneDayDecorator());
+        // 일자 선택 시 내가 정의한 드로어블이 적용되도록 한다
+        calendarView.addDecorators(new DayDecorator(getActivity().getApplicationContext()));
+
+
+//        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+//            @Override
+//            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+//                calendarView.addDecorator(EventDecorator(Collections.singleton(date)));
+//            }
+//        });
+
+         */
+
+        //일정 추가 버튼 클릭시(오른쪽 하단)
+        schedule_add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //TODAY 스케줄
+        //TODAY 스케줄 옵션 클릭시
+        today_schedule_btn_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), view, Gravity.CENTER);
+
+                popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
+                popup.setForceShowIcon(true);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu1:
+                                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+
+                                break;
+                            case R.id.menu2:
+                                today_schedule.setVisibility(View.GONE);
+                                Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+            }
+        });
+
+        //교통정보 확인하기 버튼
+        today_schedule_btn_traffic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // mainActivity.change_to_RoadFragment();
+            }
+        });
+
+        //WEEK 스케줄
+        week_schedule_btn_option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), view, Gravity.CENTER);
+
+                popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
+                popup.setForceShowIcon(true);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu1:
+                                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+
+                                break;
+                            case R.id.menu2:
+                                week_schedule_item.setVisibility(View.GONE);
+                                Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+
+            }
+        });
+        week_schedule_btn_option2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), view, Gravity.CENTER);
+
+                popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
+                popup.setForceShowIcon(true);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu1:
+                                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+
+                                break;
+                            case R.id.menu2:
+                                week_schedule_item2.setVisibility(View.GONE);
+                                Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+
+            }
+        });
+        /*
+        week_schedule_btn_option3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), view, Gravity.CENTER);
+
+                popup.getMenuInflater().inflate(R.menu.option_menu, popup.getMenu());
+                popup.setForceShowIcon(true);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu1:
+                                Toast.makeText(view.getContext(), "수정", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+
+                                break;
+                            case R.id.menu2:
+                                week_schedule_item3.setVisibility(View.GONE);
+                                Toast.makeText(view.getContext(), "삭제", Toast.LENGTH_SHORT).show(); //토스트로 실험
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+
+            }
+        });
+        */
+
+
+        //주간 스케줄 펼치기 버튼
+        btn_week_schedule_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_week_schedule_open.setVisibility(btn_week_schedule_open.GONE);
+                btn_week_schedule_close.setVisibility(btn_week_schedule_close.VISIBLE);
+
+                week_schedule_item2.setVisibility(week_schedule_item2.VISIBLE);
+                week_schedule_item3.setVisibility(week_schedule_item3.VISIBLE);
+            }
+        });
+        //주간 스케줄 단기 버튼
+        btn_week_schedule_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_week_schedule_open.setVisibility(btn_week_schedule_open.VISIBLE);
+                btn_week_schedule_close.setVisibility(btn_week_schedule_close.GONE);
+
+                week_schedule_item2.setVisibility(week_schedule_item2.GONE);
+                week_schedule_item3.setVisibility(week_schedule_item3.GONE);
+
             }
         });
 
@@ -347,7 +555,7 @@ public class HomeFragment extends Fragment {
     }//end of onCreateView
 
     //DATE를 얻는 함수
-    private String getTime(){
+    private String getTime() {
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
         return mFormat.format(mDate);
@@ -377,9 +585,11 @@ public class HomeFragment extends Fragment {
                     JSONObject tempK = new JSONObject(jsonObject.getString("main"));
 
                     //기온 받고 켈빈 온도를 섭씨 온도로 변경
-                    double tempDo = (Math.round((tempK.getDouble("temp")-273.15)*100)/100.0);
+                    double tempDo = (Math.round((tempK.getDouble("temp") - 273.15) * 100) / 100.0);
                     String tempDo_s = String.format("%.0f", tempDo);
-                    current_tmp.setText(tempDo_s +  "°C");
+
+                    current_tmp.setText(tempDo_s + "°C");
+
                     if (tempDo <= 4) {
                         txt_clothing.setText("⊙ 패딩\n⊙ 기모 옷\n⊙ 히트텍\n");
 
@@ -399,9 +609,9 @@ public class HomeFragment extends Fragment {
 
                     //날씨 아이콘 받기
                     JSONArray weather_object = jsonObject.getJSONArray("weather");
-                    JSONObject weather_icon= weather_object.getJSONObject(0);
+                    JSONObject weather_icon = weather_object.getJSONObject(0);
                     String icon = weather_icon.getString("icon");
-                    int resID = getResId("icon_"+icon, R.drawable.class);
+                    int resID = getResId("icon_" + icon, R.drawable.class);
                     ic_weather.setImageResource(resID);
 
 
@@ -449,28 +659,13 @@ public class HomeFragment extends Fragment {
         }
     }
 
-//    /* 선택된 요일의 background를 설정하는 Decorator 클래스 */
-//    private static class DayDecorator implements DayViewDecorator {
-//
-//        private final Drawable drawable;
-//        public DayDecorator(Context context) {
-//            drawable = ContextCompat.getDrawable(context, R.drawable.calendar_selector);
-//        }
-//
-//        // true를 리턴 시 모든 요일에 내가 설정한 드로어블이 적용된다
-//        @Override
-//        public boolean shouldDecorate(CalendarDay day) {
-//            return true;
-//        }
-//
-//        // 일자 선택 시 내가 정의한 드로어블이 적용되도록 한다
-//        @Override
-//        public void decorate(DayViewFacade view) {
-//            view.setSelectionDrawable(drawable);
-//        }
-//    }
 
-    //체크리스트 switch문
+
+            //checkout_switch();
+        }
+    }
+
+/*
     private void checkout_switch() {
         for (int i = 0; i < mArrayList.size(); i++) {
             switch (i) {
@@ -525,6 +720,101 @@ public class HomeFragment extends Fragment {
                     checkBox9.setChecked(mArrayList.get(9).isSelected());
                     break;
             }
+
         }
     }
+
+ */
+
+    /*
+
+     선택된 요일의 background를 설정하는 Decorator 클래스
+    private static class DayDecorator implements DayViewDecorator {
+
+        private final Drawable drawable;
+
+        public DayDecorator(Context context) {
+            drawable = ContextCompat.getDrawable(context, R.drawable.calendar_selector);
+        }
+
+        // true를 리턴 시 모든 요일에 내가 설정한 드로어블이 적용된다
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return true;
+        }
+
+        // 일자 선택 시 내가 정의한 드로어블이 적용되도록 한다
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.setSelectionDrawable(drawable);
+//            view.addSpan(new StyleSpan(Typeface.BOLD));   // 달력 안의 모든 숫자들이 볼드 처리됨
+        }
+    }
+    */
+
+
+// https://59595959.tistory.com/4
+//    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+//
+//        String[] Time_Result;
+//
+//        ApiSimulator(String[] Time_Result) {
+//            this.Time_Result = Time_Result;
+//        }
+//
+//        @Override
+//        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            Calendar calendar = Calendar.getInstance();
+//            ArrayList<CalendarDay> dates = new ArrayList<>();
+//
+//
+//            /*특정날짜 달력에 점표시해주는곳*/
+//            /*월은 0이 1월 년,일은 그대로*/
+//            //string 문자열인 Time_Result 을 받아와서 ,를 기준으로 짜르고 string을 int 로 변환
+//            for (int i = 0; i < Time_Result.length; i++) {
+//
+//
+//                //이부분에서 day를 선언하면 초기 값에 오늘 날짜 데이터 들어간다.
+//                //오늘 날짜 데이터를 첫 번째 인자로 넣기 때문에 데이터가 하나씩 밀려 마지막 데이터는 표시되지 않고, 오늘 날짜 데이터가 표시 됨.
+//                // day선언 주석처리
+//
+//                //                CalendarDay day = CalendarDay.from(calendar);
+//                //                Log.e("데이터 확인","day"+day);
+//                String[] time = Time_Result[i].split(",");
+//
+//                int year = Integer.parseInt(time[0]);
+//                int month = Integer.parseInt(time[1]);
+//                int dayy = Integer.parseInt(time[2]);
+//
+//                //선언문을 아래와 같은 위치에 선언
+//                //먼저 .set 으로 데이터를 설정한 다음 CalendarDay day = CalendarDay.from(calendar); 선언해주면 첫 번째 인자로 새로 정렬한 데이터를 넣어 줌.
+//                calendar.set(year, month - 1, dayy);
+//                CalendarDay day = CalendarDay.from(calendar);
+//                dates.add(day);
+//
+//            }
+//
+//
+//            return dates;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(@NonNull List<Calendarday> calendarDays) {
+//            super.onPostExecute(CalendarDays);
+//
+//            if (isFinishing()) {
+//                return;
+//            }
+//
+//            materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays));        }
+//    }
+
+
 }
+
