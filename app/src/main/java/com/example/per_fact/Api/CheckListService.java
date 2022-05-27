@@ -32,4 +32,7 @@ public interface CheckListService {
 
     @PUT("checklist/{id}")
     Call<CheckListData> putData(@Path("id") int id);
+
+    @GET("checklist/list/{userId}")
+    Call<List<CheckListData>> getAllData(@Path("userId") int userId);
 }
