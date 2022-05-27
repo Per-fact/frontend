@@ -173,7 +173,7 @@ public class HomeFragment extends Fragment {
                 checkBox8.setVisibility(View.INVISIBLE);
                 checkBox9.setVisibility(View.INVISIBLE);
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.CheckListActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.Activity.CheckListActivity.class);
                 intent.putParcelableArrayListExtra("checklist", mArrayList);
                 startActivityForResult(intent,0);
             }
