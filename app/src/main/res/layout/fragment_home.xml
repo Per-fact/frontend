@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEF3Fb"
-    android:orientation="vertical"
-    tools:context=".HomeFragment">
+    android:orientation="vertical">
 
 
     <ScrollView
