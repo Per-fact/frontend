@@ -12,32 +12,16 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:background="@drawable/shape"
-                    android:padding="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="전체 %s분"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
-
-                <Button
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
                     android:id="@+id/btnBus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
                     android:background="@color/white"
+                android:layout_weight="1"
                     android:drawableLeft="@drawable/bus"
                     android:text="%s분" />
 
@@ -45,8 +29,8 @@
                     android:id="@+id/btnSubway"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="3"
                     android:background="@color/white"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/subway"
                     android:text="%s분" />
 
@@ -54,12 +38,11 @@
                     android:id="@+id/btnTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="4"
                     android:background="@color/white"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/sum"
                     android:text="%s분" />
-            </TableRow>
-        </TableLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"

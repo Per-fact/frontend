@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,15 +28,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.per_fact.R;
+
 import java.util.ArrayList;
 
 public class CheckListActivity extends AppCompatActivity {
     ImageButton buttonInsert;
     ImageButton btn_back;
 
-    private ArrayList<com.example.per_fact.CheckListDictionary> mArrayList;
-    private ArrayList<com.example.per_fact.CheckListDictionary> mArrayList_check;
-    private com.example.per_fact.CheckListCustomAdapter mAdapter;
+    private ArrayList<com.example.per_fact.Activity.CheckListDictionary> mArrayList;
+    private ArrayList<com.example.per_fact.Activity.CheckListDictionary> mArrayList_check;
+    private com.example.per_fact.Activity.CheckListCustomAdapter mAdapter;
     private int count = -1;
 
     @Override
@@ -52,7 +54,7 @@ public class CheckListActivity extends AppCompatActivity {
         mArrayList = new ArrayList<>();
 
         //mAdapter = new CustomAdapter( mArrayList);
-        mAdapter = new com.example.per_fact.CheckListCustomAdapter( this, mArrayList);
+        mAdapter = new com.example.per_fact.Activity.CheckListCustomAdapter( this, mArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -67,7 +69,7 @@ public class CheckListActivity extends AppCompatActivity {
         for (int i = 0; i < mArrayList_check.size(); i++) {
             String item = mArrayList_check.get(i).getId();
 
-            com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(item);
+            com.example.per_fact.Activity.CheckListDictionary dict = new com.example.per_fact.Activity.CheckListDictionary(item);
 
             mArrayList.add(0, dict); //첫 줄에 삽입
             //mArrayList.add(dict); //마지막 줄에 삽입
@@ -100,7 +102,7 @@ public class CheckListActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String strID = editTextID.getText().toString();
 
-                        com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID);
+                        com.example.per_fact.Activity.CheckListDictionary dict = new com.example.per_fact.Activity.CheckListDictionary(strID);
 
                         mArrayList.add(0, dict); //첫 줄에 삽입
                         //mArrayList.add(dict); //마지막 줄에 삽입

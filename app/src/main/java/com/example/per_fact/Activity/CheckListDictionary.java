@@ -1,9 +1,7 @@
-package com.example.per_fact.Repository;
+package com.example.per_fact.Activity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.io.Serializable;
 
 public class CheckListDictionary implements Parcelable {
 

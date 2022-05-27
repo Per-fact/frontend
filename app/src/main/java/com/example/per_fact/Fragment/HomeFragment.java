@@ -38,7 +38,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
-    private ArrayList<com.example.per_fact.CheckListDictionary> mArrayList;
+    private ArrayList<com.example.per_fact.Activity.CheckListDictionary> mArrayList;
 
     CheckBox checkBox0;
     CheckBox checkBox1;
@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment {
                 checkBox8.setVisibility(View.INVISIBLE);
                 checkBox9.setVisibility(View.INVISIBLE);
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.CheckListActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), com.example.per_fact.Activity.CheckListActivity.class);
                 intent.putParcelableArrayListExtra("checklist", mArrayList);
                 startActivityForResult(intent,0);
             }

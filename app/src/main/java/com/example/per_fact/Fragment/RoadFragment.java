@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,15 +27,9 @@ import com.example.per_fact.Activity.MapsActivity;
 import com.example.per_fact.Activity.ODsayBackend;
 import com.example.per_fact.Activity.OfficeActivity;
 import com.example.per_fact.Activity.ScheduleActivity;
-import com.example.per_fact.Adapter.MainViewAdapter;
 import com.example.per_fact.Adapter.RoadViewAdapter;
-import com.example.per_fact.Data.Location;
-import com.example.per_fact.Data.PlaceData;
 import com.example.per_fact.Data.RoadData;
 import com.example.per_fact.R;
-
-import com.example.per_fact.Retrofit.RetrofitNet;
-import com.odsay.odsayandroidsdk.API;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,10 +38,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 
 public class RoadFragment extends Fragment {
     ODsayBackend oDsayBackend;
@@ -53,26 +45,27 @@ public class RoadFragment extends Fragment {
     Button switchStation, btnRoadFind, btnBus, btnSubway, btnTotal, btnSelect;
     ImageButton btnHome, btnBuilding;
     TextView tvHome, tvBuilding, total, tv_min, tv_busNumber, tv_startStation, tv_midStation, tv_endStation;
-    //String APIKEY_ID = "ar7zysdloh";
-    //String APIKEY = "MHEi%2FORnStzohsN6KcJhPoE4GgAiFnUu6gXHIQzb7F";
-    RecyclerView recyclerView;
+    ScrollView scrollView;
+
     ArrayList<RoadData> list2 = new ArrayList<>();
     private RoadViewAdapter adapter;
 
     private LocationManager locationManager;
 
     //출발지 경도, 위도
-    public double longitude;
-    public double latitude;
+    public double longitude = 126.97790971650069;
+    public double latitude = 37.57069834711464;
 
     //도착지 경도, 위도
-    public double dst_longitude;
-    public double dst_latitude;
+    public double dst_longitude = 127.10048819629597;
+    public double dst_latitude = 37.514466827932594;
 
     JSONArray path = new JSONArray();
 
     //path 변수
-    int time;
+    static int time, busCount, subwayCount, subwayBusCount, trafficType;
+    String firstStartStation, lastEndStation;
+
     public RoadFragment() {
         // Required empty public constructor
     }
@@ -108,14 +101,7 @@ public class RoadFragment extends Fragment {
         tv_startStation = v.findViewById(R.id.tv_startStation);
         tv_midStation = v.findViewById(R.id.tv_midStation);
         tv_endStation = v.findViewById(R.id.tv_EndStation);
-
-        //리싸이클러뷰 정의
-        recyclerView = v.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        adapter = new RoadViewAdapter(getActivity(), list2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
-
+        scrollView = v.findViewById(R.id.scrollView);
 
         clickListener();
 
@@ -145,10 +131,19 @@ public class RoadFragment extends Fragment {
             }
         });
 
-
         btnRoadFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                scrollView.setVisibility(View.VISIBLE);
+
+                btnSelect.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(), "경로가 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                        startActivity(intent);
+                    }
+                });
 
                 oDsayBackend = ODsayBackend.getInstance(getActivity().getApplicationContext());
 
@@ -157,8 +152,8 @@ public class RoadFragment extends Fragment {
                 //ODsayAPI 호출
                 path = oDsayBackend.requestRoute(longitude, latitude, dst_longitude, dst_latitude);
 
-                String stringStartStation = startStation.getText().toString();
-                String stringEndStation = endStation.getText().toString();
+                firstStartStation = startStation.getText().toString();
+                lastEndStation = endStation.getText().toString();
 
                 //Log.d("ROUTE_PATH", path.toString());
 
@@ -177,13 +172,17 @@ public class RoadFragment extends Fragment {
                             JSONObject item = subPath.getJSONObject(j);
                             Log.d("SUBPATH", item.toString());
 
+
+                            trafficType = item.getInt("trafficType");
                             //만약 traffic type ==3 이면 지하철+버스
                             if (item.getInt("trafficType") == 3) {
                                 strpath.append("걷기 : " + String.valueOf(item.getInt("distance")) + "m\n");
+                                subwayBusCount++;
                             } else {
                                 //버스와 지하철 모두 lane 배열에 담겨서 넘어오기 때문에 일단 lane array에 담아서 추출
                                 JSONArray lanes = item.getJSONArray("lane");
                                 if (item.getInt("trafficType") == 1) {
+                                    subwayCount++;
                                     strpath.append("지하철 : ");
                                     //lane Array에서 지하철 역 추출
                                     JSONArray stations = item.getJSONObject("passStopList").getJSONArray("stations");
@@ -194,6 +193,7 @@ public class RoadFragment extends Fragment {
                                 } else {
                                     //trafficType이 2이면 버스로만 이동가능
                                     strpath.append("버스 : ");
+                                    busCount++;
                                     for (int l = 0; l < lanes.length(); l++) {
                                         //busNo 로 추출하여 몇번 버스 탑승하는지, 승차 및 하차 정류장 표시
                                         strpath.append(lanes.getJSONObject(l).getString("busNo") + " \n" + String.valueOf(item.getString("startName")) + " 탑승 \n" + String.valueOf(item.getString("endName")) + " 하차");
@@ -204,6 +204,7 @@ public class RoadFragment extends Fragment {
                             }
                         }
                         time = path.getJSONObject(i).getJSONObject("info").getInt("totalTime");
+                        Log.i("sooyeon", String.valueOf(time));
                         int pay = path.getJSONObject(i).getJSONObject("info").getInt("payment");
                         strpath.append("소요시간 : " + String.valueOf(time) + "분\n");
                         strpath.append("금액 : " + String.valueOf(pay) + "원\n");
@@ -211,68 +212,12 @@ public class RoadFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                     list.add(strpath.toString());
-
                 }
 
                 for (int j = 0; j < list.size(); j++) {
                     Log.i("data", list.get(j));
                 }
-
-
-                if(stringStartStation != null && stringEndStation != null) {
-                    Call<Location> call = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(stringStartStation, "KakaoAK c6ca841b4aef918c0b7663d53e05fc5f");
-                    call.enqueue(new Callback<Location>() {
-                        @Override
-                        public void onResponse(Call<Location> call, Response<Location> response) {
-                            if (response.isSuccessful()) {
-                                if (response.body() != null) {
-                                    Log.i("출발지 longitude", response.body().documentsList.get(0).getX().toString());
-                                    Log.i("출발지 latitude", response.body().documentsList.get(0).getY().toString());
-                                    longitude = response.body().documentsList.get(0).getX();
-                                    latitude = response.body().documentsList.get(0).getY();
-                                    recyclerView.setVisibility(View.VISIBLE);
-//                                    list2.add(new RoadData());
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Location> call, Throwable t) {
-                            Log.i("출발지", "실패");
-                        }
-                    });
-
-                    Call<Location> call2 = RetrofitNet.getRetrofit().getSearchAddrService().searchAddressList(stringEndStation, "KakaoAK c6ca841b4aef918c0b7663d53e05fc5f");
-                    call2.enqueue(new Callback<Location>() {
-                        @Override
-                        public void onResponse(Call<Location> call2, Response<Location> response) {
-                            if (response.isSuccessful()) {
-                                if (response.body() != null) {
-                                    Log.i("목적지 x", response.body().documentsList.get(0).getX().toString());
-                                    Log.i("목적지 y", response.body().documentsList.get(0).getY().toString());
-                                    dst_longitude = response.body().documentsList.get(0).getX();
-                                    dst_latitude = response.body().documentsList.get(0).getY();
-
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Location> call, Throwable t) {
-                                Log.i("목적지", "실패");
-                        }
-                    });
-                }
-
-                btnSelect.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
-                        startActivity(intent);
-                    }
-                });
             }
         });
     }

@@ -30,7 +30,7 @@ public class RoadViewAdapter extends RecyclerView.Adapter<RoadViewAdapter.Holder
     @NonNull
     @Override
     public RoadViewAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview, parent, false);
         RoadViewAdapter.Holder holder = new RoadViewAdapter.Holder(view);
         return holder;
     }
@@ -38,10 +38,14 @@ public class RoadViewAdapter extends RecyclerView.Adapter<RoadViewAdapter.Holder
     @Override
     public void onBindViewHolder(@NonNull RoadViewAdapter.Holder holder, int position) {
         int itemposition = position;
-        holder.time.setText(list.get(itemposition).totalTime);
-        holder.btnBus.setText(list.get(itemposition).busCount);
-        holder.btnSubway.setText(list.get(itemposition).subwayCount);
-        holder.btnTotal.setText(list.get(itemposition).subwayBusCount);
+        String bc = String.valueOf(list.get(itemposition).busCount);
+        String sc = String.valueOf(list.get(itemposition).subwayCount);
+        String sbc = String.valueOf(list.get(itemposition).subwayBusCount);
+        String tt = String.valueOf(list.get(itemposition).totalTime);
+        holder.btnBus.setText(bc);
+        holder.btnSubway.setText(sc);
+        holder.btnTotal.setText(sbc);
+        holder.time.setText(tt);
         holder.startStation.setText(list.get(itemposition).firstStartStation);
         holder.endStation.setText(list.get(itemposition).lastEndStation);
 
@@ -70,12 +74,6 @@ public class RoadViewAdapter extends RecyclerView.Adapter<RoadViewAdapter.Holder
             startStation = itemView.findViewById(R.id.tv_startStation);
             endStation = itemView.findViewById(R.id.tv_EndStation);
 
-            btnSelect.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "경로가 선택되었습니다.", Toast.LENGTH_SHORT).show();
-                }
-            });
 
         }
     }

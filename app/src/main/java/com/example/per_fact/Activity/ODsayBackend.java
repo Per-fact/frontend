@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.per_fact.Data.OdsayData;
+import com.example.per_fact.Data.RoadData;
 import com.odsay.odsayandroidsdk.API;
 import com.odsay.odsayandroidsdk.ODsayData;
 import com.odsay.odsayandroidsdk.ODsayService;
@@ -20,6 +21,9 @@ public class ODsayBackend implements OnResultCallbackListener {
     String apiKey = "Fm8lbwL5ydRCXpTuXJaCnx6h2rPo1+s+5wo+KvJjf6g";
     ODsayService oDsayService;
     JSONArray pathArray = new JSONArray();
+    JSONArray resultArray = new JSONArray();
+    int busCount, subwayCount, subwayBusCount, time, pathType;
+    String firstStartStation, lastEndStation;
 
     public ODsayBackend(Context context) {
         oDsayService = ODsayService.init(context, apiKey);
@@ -54,13 +58,23 @@ public class ODsayBackend implements OnResultCallbackListener {
     public void onSuccess(ODsayData oDsayData, API api) {
         try {
             JSONObject resjson = oDsayData.getJson().getJSONObject("result");
+            for(int i = 0; i < resultArray.length(); i++) {
+                busCount = resultArray.getJSONObject(i).getJSONObject("result").getInt("busCount");
+                subwayCount = resultArray.getJSONObject(i).getJSONObject("result").getInt("subwayCount");
+                subwayBusCount = resultArray.getJSONObject(i).getJSONObject("result").getInt("SubwayBusCount");
+            }
             //Log.d("JSON", resjson.toString());
 
             pathArray = resjson.getJSONArray("path");
 
             for (int i = 0; i < pathArray.length(); i++) {
                 // Log.d("JSON_PATH", String.valueOf(pathArray.get(i)));
-                int time = pathArray.getJSONObject(i).getJSONObject("info").getInt("totalTime");
+                time = pathArray.getJSONObject(i).getJSONObject("info").getInt("totalTime");
+                Log.i("sooyeon", String.valueOf(time));
+//                pathType = pathArray.getJSONObject(i).getJSONObject("path").getInt("pathType");
+                firstStartStation = pathArray.getJSONObject(i).getJSONObject("info").getString("firstStartStation");
+                lastEndStation = pathArray.getJSONObject(i).getJSONObject("info").getString("lastEndStation");
+                new RoadData(busCount, subwayCount, subwayBusCount, time, firstStartStation, lastEndStation);
                 //Log.d("ROUTE", String.valueOf(time));
             }
         } catch (JSONException e) {

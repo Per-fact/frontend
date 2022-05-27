@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/et_shape"
-                    android:hint="현위치: 서울 노원구 공릉동 123"
+                    android:hint="현위치: 서울특별시 은평구 통일로 684"
                     android:padding="10dp" />
 
                 <EditText
@@ -119,11 +119,308 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"
-        android:overScrollMode="never"
-        android:visibility="invisible"/>
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="전체 43분"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/btnBus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/bus"
+                    android:text="43분" />
+
+                <Button
+                    android:id="@+id/btnSubway"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/subway"
+                    android:text="30분" />
+
+                <Button
+                    android:id="@+id/btnTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/sum"
+                    android:text="52분" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="213dp"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/optimum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최적"
+                    android:textColor="#4887E7" />
+
+                <TextView
+                    android:id="@+id/tv_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/optimum"
+                    android:text="43분"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/tv_startStation"/>
+
+                <TextView
+                    android:id="@+id/tv_startStation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_min"
+                    android:layout_marginTop="10dp"
+                    android:text="불광역" />
+
+                <LinearLayout
+                    android:id="@+id/tv_busNumber6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_startStation"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_startStation"
+                        android:text="오금행"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_startStation"
+                        android:layout_marginLeft="10dp"
+                        android:text="도착 또는 출발"
+                        android:textColor="#FF0000"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_midStation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_busNumber6"
+                    android:layout_marginTop="10dp"
+                    android:text="을지로3가역" />
+
+                <TextView
+                    android:id="@+id/tv_EndStation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_midStation"
+                    android:paddingTop="10dp"
+                    android:text="성수역1번출구 정류장" />
+
+                <Button
+                    android:id="@+id/btnSelect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/shape"
+                    android:padding="10dp"
+                    android:text="경로 선택하기"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="213dp"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_min2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="47분"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/bus2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_min2"
+                android:text="불광역"/>
+
+            <LinearLayout
+                android:id="@+id/busNumber4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/bus2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_startStation"
+                    android:text="오금행"
+                    android:textSize="12dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_startStation"
+                    android:text="도착 또는 출발"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#FF0000"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_midStation2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/busNumber4"
+                android:layout_marginTop="20dp"
+                android:text="충무로역" />
+
+            <TextView
+                android:id="@+id/tv_busNumber2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_midStation2"
+                android:text="동대문역사문화공원역"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_EndStation2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_busNumber2"
+                android:text="성수역" />
+
+            <Button
+                android:id="@+id/btnSelect2"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape"
+                android:padding="10dp"
+                android:text="경로 선택하기"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="213dp"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_min3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="49분"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_startStation3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_min3"
+                android:layout_marginTop="10dp"
+                android:text="불광역" />
+
+            <LinearLayout
+                android:id="@+id/busNumber5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_startStation3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수성행"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="4분 20초"
+                    android:textColor="#FF0000"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_midStation3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_startStation3"
+                android:layout_marginTop="20dp"
+                android:text="종로3가역" />
+
+            <TextView
+                android:id="@+id/tv_busNumber3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_midStation3"
+                android:text="을지로4가역"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_EndStation3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_busNumber3"
+                android:paddingTop="10dp"
+                android:text="성수역" />
+
+            <Button
+                android:id="@+id/btnSelect3"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+
+                android:background="@drawable/shape"
+                android:padding="10dp"
+                android:text="경로 선택하기"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

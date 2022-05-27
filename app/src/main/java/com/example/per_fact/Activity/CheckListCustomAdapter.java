@@ -1,4 +1,4 @@
-package com.example.per_fact;
+package com.example.per_fact.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,18 +13,19 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.per_fact.R;
+
 import java.util.ArrayList;
 
 public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustomAdapter.CustomViewHolder> {
 
-    private ArrayList<com.example.per_fact.CheckListDictionary> mList;
+    private ArrayList<com.example.per_fact.Activity.CheckListDictionary> mList;
     private Context mContext;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder
@@ -43,7 +44,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
         }
     }
 
-    public CheckListCustomAdapter(Context context, ArrayList<com.example.per_fact.CheckListDictionary> list) {
+    public CheckListCustomAdapter(Context context, ArrayList<com.example.per_fact.Activity.CheckListDictionary> list) {
         mList = list;
         mContext = context;
 
@@ -116,7 +117,7 @@ public class CheckListCustomAdapter extends RecyclerView.Adapter<CheckListCustom
                                     public void onClick(View v) {
                                         String strID = editTextID.getText().toString();
 
-                                        com.example.per_fact.CheckListDictionary dict = new com.example.per_fact.CheckListDictionary(strID);
+                                        com.example.per_fact.Activity.CheckListDictionary dict = new com.example.per_fact.Activity.CheckListDictionary(strID);
                                         //여기
 
 
