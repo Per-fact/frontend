@@ -5,18 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEF3Fb"
-    android:orientation="vertical"
-    tools:context=".HomeFragment">
-
-
+    android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <TextView
                 android:id="@+id/today_View"
                 android:layout_width="match_parent"
@@ -28,8 +23,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
             <TextView
                 android:id="@+id/date_View"
                 android:layout_width="match_parent"
@@ -44,6 +37,18 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/today_View" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="체크리스트를 확인하세요!"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/check_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/check_list"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="60dp"
+
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -54,13 +59,11 @@
                 app:layout_constraintEnd_toStartOf="@id/check_list"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/check_list">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_weight="1"
                     android:background="@drawable/white_background">
-
                     <ImageView
                         android:id="@+id/ic_weather"
                         android:layout_width="60dp"
@@ -70,7 +73,6 @@
                         app:layout_constraintEnd_toStartOf="@id/txt_current_tmp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/txt_current_tmp"
                         android:layout_width="wrap_content"
@@ -82,7 +84,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/ic_weather"
                         app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/txt_weather"
                         android:layout_width="wrap_content"
@@ -95,14 +96,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ic_weather" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/blue_background">
-
                     <TextView
                         android:id="@+id/txt_clothing"
                         android:layout_width="wrap_content"
@@ -113,7 +112,6 @@
                         android:textSize="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt_clothing1" />
-
                     <TextView
                         android:id="@+id/txt_clothing1"
                         android:layout_width="wrap_content"
@@ -126,14 +124,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </LinearLayout>
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/check_list"
                 android:layout_width="206dp"
@@ -146,9 +138,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/calendarView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/date_View"
-
                 tools:layout_editor_absoluteY="77dp">
-
                 <CheckBox
                     android:id="@+id/checkBox0"
                     android:layout_width="wrap_content"
@@ -165,7 +155,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <CheckBox
                     android:id="@+id/checkBox1"
                     android:layout_width="wrap_content"
@@ -182,7 +171,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/checkBox0" />
-
                 <CheckBox
                     android:id="@+id/checkBox2"
                     android:layout_width="wrap_content"
@@ -199,7 +187,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/checkBox1" />
-
                 <CheckBox
                     android:id="@+id/checkBox3"
                     android:layout_width="wrap_content"
@@ -216,7 +203,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/checkBox2" />
-
                 <CheckBox
                     android:id="@+id/checkBox4"
                     android:layout_width="wrap_content"
@@ -233,7 +219,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/checkBox3" />
-
                 <CheckBox
                     android:id="@+id/checkBox5"
                     android:layout_width="wrap_content"
@@ -250,7 +235,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <CheckBox
                     android:id="@+id/checkBox6"
                     android:layout_width="wrap_content"
@@ -267,7 +251,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox7"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
-
                 <CheckBox
                     android:id="@+id/checkBox7"
                     android:layout_width="wrap_content"
@@ -284,7 +267,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
-
                 <CheckBox
                     android:id="@+id/checkBox8"
                     android:layout_width="wrap_content"
@@ -301,7 +283,6 @@
                     app:layout_constraintBottom_toTopOf="@id/checkBox9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
-
                 <CheckBox
                     android:id="@+id/checkBox9"
                     android:layout_width="wrap_content"
@@ -318,10 +299,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <ImageButton
                 android:id="@+id/check_add_button"
                 android:layout_width="48dp"
@@ -335,11 +313,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            <CalendarView
                 android:id="@+id/calendarView"
-
                 android:layout_width="match_parent"
-
                 android:layout_height="390dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -368,20 +344,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calendarView">
-
                 <TextView
                     android:id="@+id/today_schedule_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5.13(수)"
+                    android:text="5.28(토)"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/today_schedule_title"
                     app:layout_constraintEnd_toStartOf="@id/txt_today"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-
                     />
-
                 <TextView
                     android:id="@+id/txt_today"
                     android:layout_width="wrap_content"
@@ -391,7 +364,6 @@
                     android:textColor="#FF5353"
                     app:layout_constraintBaseline_toBaselineOf="@+id/today_schedule_date"
                     app:layout_constraintStart_toEndOf="@+id/today_schedule_date" />
-
                 <TextView
                     android:id="@+id/today_schedule_title"
                     android:layout_width="wrap_content"
@@ -403,7 +375,6 @@
                     app:layout_constraintBottom_toTopOf="@id/today_schedule_time"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/today_schedule_date" />
-
                 <TextView
                     android:id="@+id/today_schedule_time"
                     android:layout_width="wrap_content"
@@ -414,7 +385,6 @@
                     app:layout_constraintBottom_toTopOf="@id/today_schedule_ic_memo"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/today_schedule_title" />
-
                 <ImageView
                     android:id="@+id/today_schedule_ic_memo"
                     android:layout_width="wrap_content"
@@ -424,7 +394,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/today_schedule_time" />
-
                 <TextView
                     android:id="@+id/today_schedule_memo"
                     android:layout_width="wrap_content"
@@ -435,7 +404,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/today_schedule_ic_memo"
                     app:layout_constraintTop_toBottomOf="@id/today_schedule_time" />
-
                 <ImageButton
                     android:id="@+id/today_schedule_btn_option"
                     android:layout_width="48dp"
@@ -444,7 +412,6 @@
                     android:src="@drawable/ic_option"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <ImageButton
                     android:id="@+id/today_schedule_btn_traffic"
                     android:layout_width="wrap_content"
@@ -465,7 +432,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/today_schedule" />
-
             <LinearLayout
                 android:id="@+id/calendar_list"
                 android:layout_width="match_parent"
@@ -478,16 +444,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_weekschedlue">
-
                 //
-
                 <LinearLayout
                     android:id="@+id/week_schedule_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:id="@+id/week_schedule_date"
                         android:layout_width="wrap_content"
@@ -495,7 +458,7 @@
                         android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:background="@drawable/blue3_background"
-                        android:text="5.9 토"
+                        android:text="6.2 목"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -504,16 +467,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/blue_background"
                         android:padding="20dp">
-
                         <TextView
                             android:id="@+id/week_schedule_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="큐시즘의 밤"
+                            android:text="약속1"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
                         <TextView
                             android:id="@+id/week_schedule_time"
                             android:layout_width="wrap_content"
@@ -523,7 +484,6 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/week_schedule_title" />
-
                         <ImageButton
                             android:id="@+id/week_schedule_btn_option"
                             android:layout_width="48dp"
@@ -536,14 +496,13 @@
                 </LinearLayout>
                 //
                 //
-
                 <LinearLayout
                     android:id="@+id/week_schedule_item2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/week_schedule_date2"
@@ -552,7 +511,7 @@
                         android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:background="@drawable/blue3_background"
-                        android:text="5.9 토"
+                        android:text="6.3 금"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -561,16 +520,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/blue_background"
                         android:padding="20dp">
-
                         <TextView
                             android:id="@+id/week_schedule_title2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="큐시즘의 밤"
+                            android:text="미팅"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
                         <TextView
                             android:id="@+id/week_schedule_time2"
                             android:layout_width="wrap_content"
@@ -580,7 +537,6 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/week_schedule_title2" />
-
                         <ImageButton
                             android:id="@+id/week_schedule_btn_option2"
                             android:layout_width="48dp"
@@ -593,14 +549,13 @@
                 </LinearLayout>
                 //
                 //
-
                 <LinearLayout
                     android:id="@+id/week_schedule_item3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/week_schedule_date3"
@@ -609,7 +564,7 @@
                         android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:background="@drawable/blue3_background"
-                        android:text="5.9 토"
+                        android:text="6.4 토"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -618,16 +573,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/blue_background"
                         android:padding="20dp">
-
                         <TextView
                             android:id="@+id/week_schedule_title3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="큐시즘의 밤"
+                            android:text="약속2"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
                         <TextView
                             android:id="@+id/week_schedule_time3"
                             android:layout_width="wrap_content"
@@ -637,7 +590,6 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/week_schedule_title3" />
-
                         <ImageButton
                             android:id="@+id/week_schedule_btn_option3"
                             android:layout_width="48dp"
@@ -649,7 +601,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
                 //
-
                 <ImageButton
                     android:id="@+id/btn_week_schedule_open"
                     android:layout_width="wrap_content"
@@ -658,7 +609,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/btn_open"
-                    android:visibility="visible" />
+                android:visibility="gone" />
 
                 <ImageButton
                     android:id="@+id/btn_week_schedule_close"
@@ -669,12 +620,9 @@
                     android:background="@android:color/transparent"
                     android:src="@drawable/btn_close"
                     android:visibility="gone" />
-
-
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/schedule_add_button"
         android:layout_width="48dp"
@@ -682,5 +630,4 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="20dp"
         android:background="@drawable/ic_button_add"/>
-
 </FrameLayout>

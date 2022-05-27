@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
-
+//체크리스트 담을 객체(직렬화Pacelable)
 public class CheckListDictionary implements Parcelable {
 
     private String id;
