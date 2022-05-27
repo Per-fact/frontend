@@ -44,7 +44,8 @@ public class ScheduleActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener myDatePicker1, myDatePicker2;
     Calendar startCalendar, endCalendar;
     StringBuilder startInfo, endInfo;
-    String startTime, endTime;
+    String startDate,startTime, endTime;
+    int prepareTime, startHour, startMin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class ScheduleActivity extends AppCompatActivity {
         startCalendar = Calendar.getInstance();
         endCalendar = Calendar.getInstance();
 
+
         myDatePicker1 = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -87,6 +89,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             }
         };
+
 
 
     }
@@ -139,6 +142,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 String myFormat = "yyyy-MM-dd";    // 출력형식   2021/07/26
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
                 start_date.setText(sdf.format(startCalendar.getTime()));
+                startDate = sdf.format(startCalendar.getTime());
                 startInfo = new StringBuilder(sdf.format(startCalendar.getTime()));
             }
 
@@ -185,39 +189,51 @@ public class ScheduleActivity extends AppCompatActivity {
                         switch (i) {
                             case 0:
                                 btnPrepare.setText("10분");
+                                prepareTime = 10;
                                 break;
                             case 1:
                                 btnPrepare.setText("20분");
+                                prepareTime =20;
                                 break;
                             case 2:
                                 btnPrepare.setText("30분");
+                                prepareTime = 30;
                                 break;
                             case 3:
                                 btnPrepare.setText("40분");
+                                prepareTime = 40;
                                 break;
                             case 4:
                                 btnPrepare.setText("50분");
+                                prepareTime = 50;
                                 break;
                             case 5:
                                 btnPrepare.setText("1시간");
+                                prepareTime = 60;
                                 break;
                             case 6:
                                 btnPrepare.setText("1시간 10분");
+                                prepareTime = 70;
                                 break;
                             case 7:
                                 btnPrepare.setText("1시간 20분");
+                                prepareTime = 80;
                                 break;
                             case 8:
                                 btnPrepare.setText("1시간 30분");
+                                prepareTime = 90;
                                 break;
                             case 9:
                                 btnPrepare.setText("1시간 40분");
+                                prepareTime = 100;
                                 break;
                             case 10:
                                 btnPrepare.setText("1시간 50분");
+                                prepareTime = 110;
                                 break;
                             case 11:
                                 btnPrepare.setText("2시간");
+                                prepareTime = 120;
                                 break;
                             default:
                                 Toast.makeText(ScheduleActivity.this, "시간을 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -237,6 +253,10 @@ public class ScheduleActivity extends AppCompatActivity {
                     Toast.makeText(ScheduleActivity.this, "값을 모두 입력해주세요.", Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(ScheduleActivity.this, CompleteActivity.class);
+                    intent.putExtra("prepareTime", prepareTime);
+                    intent.putExtra("startDate", startDate);
+                    intent.putExtra("startHour", startHour);
+                    intent.putExtra("startMin", startMin);
                     startActivity(intent);
                 }
             }
@@ -266,6 +286,10 @@ public class ScheduleActivity extends AppCompatActivity {
                         start_time.setText(hourOfDay + "시 " + minute + "분 " + status);
                         startInfo.append(" " + hourOfDay + ":" + minute + status);
 
+                        //intent로 넘겨줄 때 활용
+                        startHour = hourOfDay;
+                        startMin = minute;
+
                         //서버에 저장될 시간
                         startTime = startInfo.toString();
 
@@ -290,11 +314,11 @@ public class ScheduleActivity extends AppCompatActivity {
                             status = "PM";
                         }
 
-
                         end_time.setText(hourOfDay + "시 " + minute + "분");
 
                         end_time.setText(hourOfDay + "시 " + minute + "분 " + status);
                         endInfo.append(" " + hourOfDay + ":" + minute + status);
+
 
                         //서버에 저장될 시간
                         endTime = endInfo.toString();
