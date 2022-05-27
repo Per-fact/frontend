@@ -42,8 +42,8 @@ import java.util.List;
 public class RoadFragment extends Fragment {
     ODsayBackend oDsayBackend;
     EditText startStation, endStation;
-    Button switchStation, btnRoadFind, btnBus, btnSubway, btnTotal, btnSelect;
-    ImageButton btnHome, btnBuilding;
+    Button   btnBus, btnSubway, btnTotal, btnSelect;
+    ImageButton btnHome, btnBuilding,switchStation, btnRoadFind;
     TextView tvHome, tvBuilding, total, tv_min, tv_busNumber, tv_startStation, tv_midStation, tv_endStation;
     ScrollView scrollView;
 

@@ -9,23 +9,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4887E7"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:background="#4989E8"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지도"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="25dp"
-            android:paddingLeft="10dp"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
             <RelativeLayout
                 android:layout_width="350dp"
@@ -35,42 +39,48 @@
                     android:id="@+id/et_startStation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_shape"
-                    android:hint="현위치: 서울특별시 은평구 통일로 684"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/blue_background"
+                    android:textSize="16dp"
+                    android:hint="현위치: 서울특별시 은평구 통일로 684" />
 
                 <EditText
                     android:id="@+id/et_endStation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/et_startStation"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/et_shape"
                     android:hint="성수역"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/blue_background"/>
+
             </RelativeLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/switchStation"
                 android:layout_width="20dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="3dp"
                 android:background="@drawable/toggle" />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <ImageButton
                 android:id="@+id/btnHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#4887E7"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
                 android:focusableInTouchMode="true"
-                android:paddingTop="5dp"
                 android:src="@drawable/home" />
 
             <TextView
@@ -79,17 +89,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_toRightOf="@id/btnHome"
-                android:padding="10dp"
+                android:gravity="bottom"
+                android:paddingTop="12dp"
                 android:text="집"
                 android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <ImageButton
                 android:id="@+id/btnBuilding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_toRightOf="@id/tvHome"
-                android:background="#4887E7"
+                android:background="@android:color/transparent"
                 android:focusableInTouchMode="true"
                 android:paddingTop="5dp"
                 android:src="@drawable/building" />
@@ -99,23 +110,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/btnBuilding"
-                android:padding="10dp"
+                android:paddingTop="12dp"
                 android:text="회사"
                 android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnRoadFind"
                 android:layout_width="wrap_content"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/shape"
-                android:drawableLeft="@drawable/road"
-                android:drawableTint="@color/white"
-                android:padding="5dp"
-                android:text="길찾기"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                android:paddingTop="6dp"
+                android:src="@drawable/ic_btn_roadsearch"
+                />
         </RelativeLayout>
     </LinearLayout>
 

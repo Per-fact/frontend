@@ -1,5 +1,6 @@
 package com.example.per_fact.Activity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -8,10 +9,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,13 +30,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.per_fact.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class ScheduleActivity extends AppCompatActivity {
 
     ImageButton btnBack, btnCheck;
     ToggleButton toggleBtn1, toggleBtn2, toggleBtn3;
-    Button start_time, end_time, btnPrepare;
+    Button start_date, end_date, start_time, end_time, btnPrepare;
     EditText title, memo;
     String[] time = {"10분", "20분", "30분", "40분", "50분", "1시간", "1시간 10분", "1시간 20분", "1시간 30분", "1시간 40분", "1시간 50분", "2시간"};
+    DatePickerDialog.OnDateSetListener myDatePicker1, myDatePicker2;
+    Calendar startCalendar, endCalendar;
+    StringBuilder startInfo, endInfo;
+    String startTime, endTime;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +58,39 @@ public class ScheduleActivity extends AppCompatActivity {
     private void init() {
         btnBack = findViewById(R.id.btnBack);
         btnCheck = findViewById(R.id.btnCheck);
-        toggleBtn1 = findViewById(R.id.toggleBtn1);
         toggleBtn2 = findViewById(R.id.toggleBtn2);
         toggleBtn3 = findViewById(R.id.toggleBtn3);
         start_time = findViewById(R.id.startTime);
+        start_date = findViewById(R.id.startDay);
+        end_date = findViewById(R.id.endDay);
         end_time = findViewById(R.id.endTime);
         title = findViewById(R.id.et_title);
         memo = findViewById(R.id.et_memo);
         btnPrepare = findViewById(R.id.btnPrepare);
+        startCalendar = Calendar.getInstance();
+        endCalendar = Calendar.getInstance();
+
+        myDatePicker1 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                startCalendar.set(Calendar.YEAR, year);
+                startCalendar.set(Calendar.MONTH, month);
+                startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            }
+        };
+
+        myDatePicker2 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                endCalendar.set(Calendar.YEAR, year);
+                endCalendar.set(Calendar.MONTH, month);
+                endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            }
+        };
+
+
     }
+
     private void check() {
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -64,19 +100,6 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         });
 
-        //종일 togglebtn
-        toggleBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
-                if (isChecked == true) {
-                    Toast.makeText(ScheduleActivity.this, "알림 설정이 ON 되었습니다.", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(ScheduleActivity.this, "알림을 끄면 준비 시작 시간에 대한 알림을 받지 못해요 :(\n그래도 괜찮으시다면 알림 OFF를 해주세요.", Toast.LENGTH_SHORT).show();
-                }
-                toggleBtn3.setText("Status: " + isChecked);
-            }
-        });
 
         //준비 시작 시간 알림 togglebtn
         toggleBtn2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -85,7 +108,7 @@ public class ScheduleActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
                 if (isChecked == true) {
                     Toast.makeText(ScheduleActivity.this, "알림 설정이 ON 되었습니다.", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(ScheduleActivity.this, "알림을 끄면 준비 시작 시간에 대한 알림을 받지 못해요 :(", Toast.LENGTH_SHORT).show();
                 }
                 toggleBtn3.setText("Status: " + isChecked);
@@ -99,12 +122,29 @@ public class ScheduleActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
                 if (isChecked == true) {
                     Toast.makeText(ScheduleActivity.this, "알림 설정이 ON 되었습니다.", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(ScheduleActivity.this, "알림을 끄면 나가야 하는 시간에 대한 알림을 받지 못해요 :(", Toast.LENGTH_SHORT).show();
                 }
                 toggleBtn3.setText("Status: " + isChecked);
             }
         });
+
+
+        start_date.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(ScheduleActivity.this, myDatePicker1, startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH), startCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                String myFormat = "yyyy-MM-dd";    // 출력형식   2021/07/26
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+                start_date.setText(sdf.format(startCalendar.getTime()));
+                startInfo = new StringBuilder(sdf.format(startCalendar.getTime()));
+            }
+
+
+        });
+
 
         start_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +152,20 @@ public class ScheduleActivity extends AppCompatActivity {
                 showDialog(1);
             }
         });
+
+
+        end_date.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                new DatePickerDialog(ScheduleActivity.this, myDatePicker2, endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH), endCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                String myFormat = "yyyy-MM-dd";    // 출력형식   2021/07/26
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+                end_date.setText(sdf.format(endCalendar.getTime()));
+                endInfo = new StringBuilder(sdf.format(endCalendar.getTime()));
+            }
+
+        });
+
 
         end_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +183,8 @@ public class ScheduleActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i) {
-                            case 0:btnPrepare.setText("10분");
+                            case 0:
+                                btnPrepare.setText("10분");
                                 break;
                             case 1:
                                 btnPrepare.setText("20분");
@@ -180,15 +235,15 @@ public class ScheduleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (TextUtils.isEmpty(title.getText().toString()) || TextUtils.isEmpty(start_time.getText().toString()) || TextUtils.isEmpty(end_time.getText().toString()) || TextUtils.isEmpty(btnPrepare.getText().toString())) {
                     Toast.makeText(ScheduleActivity.this, "값을 모두 입력해주세요.", Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     Intent intent = new Intent(ScheduleActivity.this, CompleteActivity.class);
                     startActivity(intent);
                 }
-                }
+            }
         });
 
     }
+
 
     @Override
     @Deprecated
@@ -199,8 +254,21 @@ public class ScheduleActivity extends AppCompatActivity {
                         android.R.style.Theme_Holo_Dialog_NoActionBar, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String status = "AM";
+
+                        if (hourOfDay > 11) {
+                            // If the hour is greater than or equal to 12
+                            // Then the current AM PM status is PM
+                            status = "PM";
+                        }
+
                         Toast.makeText(getApplicationContext(), hourOfDay + "시 " + minute + "분 을 선택했습니다", Toast.LENGTH_SHORT).show();
-                        start_time.setText(hourOfDay + "시 " + minute + "분");
+                        start_time.setText(hourOfDay + "시 " + minute + "분 " + status);
+                        startInfo.append(" " + hourOfDay + ":" + minute + status);
+
+                        //서버에 저장될 시간
+                        startTime = startInfo.toString();
+
                     }
                 }, // 값설정시 호출될 리스너 등록
                         4, 19, false); // 기본값 시분 등록
@@ -213,7 +281,24 @@ public class ScheduleActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Toast.makeText(getApplicationContext(), hourOfDay + "시 " + minute + "분 을 선택했습니다", Toast.LENGTH_SHORT).show();
+
+                        String status = "AM";
+
+                        if (hourOfDay > 11) {
+                            // If the hour is greater than or equal to 12
+                            // Then the current AM PM status is PM
+                            status = "PM";
+                        }
+
+
                         end_time.setText(hourOfDay + "시 " + minute + "분");
+
+                        end_time.setText(hourOfDay + "시 " + minute + "분 " + status);
+                        endInfo.append(" " + hourOfDay + ":" + minute + status);
+
+                        //서버에 저장될 시간
+                        endTime = endInfo.toString();
+
                     }
                 }, // 값설정시 호출될 리스너 등록
                         4, 19, false); // 기본값 시분 등록
@@ -225,3 +310,6 @@ public class ScheduleActivity extends AppCompatActivity {
         }
     }
 }
+
+
+
