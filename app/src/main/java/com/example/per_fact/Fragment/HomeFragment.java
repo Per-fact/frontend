@@ -3,20 +3,8 @@ package com.example.per_fact.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,13 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,36 +31,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import com.example.per_fact.Activity.MainActivity;
-import com.example.per_fact.Calendar.EventDecorator;
 import com.example.per_fact.Calendar.OneDayDecorator;
 import com.example.per_fact.Calendar.SaturdayDecorator;
 import com.example.per_fact.Calendar.SundayDecorator;
+import com.example.per_fact.R;
+import com.example.per_fact.Repository.CheckListDictionary;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
-import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
-
-import com.example.per_fact.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.threeten.bp.DayOfWeek;
-import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -87,7 +72,7 @@ public class HomeFragment extends Fragment {
         super.onDetach();
         mainActivity = null;
     }
-    private ArrayList<com.example.per_fact.CheckListDictionary> mArrayList;
+    private ArrayList<CheckListDictionary> mArrayList;
     private MaterialCalendarView calendarView;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
@@ -562,72 +547,4 @@ public class HomeFragment extends Fragment {
 //            view.addSpan(new StyleSpan(Typeface.BOLD));   // 달력 안의 모든 숫자들이 볼드 처리됨
         }
     }
-
-
-
-
-
-// https://59595959.tistory.com/4
-//    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
-//
-//        String[] Time_Result;
-//
-//        ApiSimulator(String[] Time_Result) {
-//            this.Time_Result = Time_Result;
-//        }
-//
-//        @Override
-//        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//            Calendar calendar = Calendar.getInstance();
-//            ArrayList<CalendarDay> dates = new ArrayList<>();
-//
-//
-//            /*특정날짜 달력에 점표시해주는곳*/
-//            /*월은 0이 1월 년,일은 그대로*/
-//            //string 문자열인 Time_Result 을 받아와서 ,를 기준으로 짜르고 string을 int 로 변환
-//            for (int i = 0; i < Time_Result.length; i++) {
-//
-//
-//                //이부분에서 day를 선언하면 초기 값에 오늘 날짜 데이터 들어간다.
-//                //오늘 날짜 데이터를 첫 번째 인자로 넣기 때문에 데이터가 하나씩 밀려 마지막 데이터는 표시되지 않고, 오늘 날짜 데이터가 표시 됨.
-//                // day선언 주석처리
-//
-//                //                CalendarDay day = CalendarDay.from(calendar);
-//                //                Log.e("데이터 확인","day"+day);
-//                String[] time = Time_Result[i].split(",");
-//
-//                int year = Integer.parseInt(time[0]);
-//                int month = Integer.parseInt(time[1]);
-//                int dayy = Integer.parseInt(time[2]);
-//
-//                //선언문을 아래와 같은 위치에 선언
-//                //먼저 .set 으로 데이터를 설정한 다음 CalendarDay day = CalendarDay.from(calendar); 선언해주면 첫 번째 인자로 새로 정렬한 데이터를 넣어 줌.
-//                calendar.set(year, month - 1, dayy);
-//                CalendarDay day = CalendarDay.from(calendar);
-//                dates.add(day);
-//
-//            }
-//
-//
-//            return dates;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(@NonNull List<Calendarday> calendarDays) {
-//            super.onPostExecute(CalendarDays);
-//
-//            if (isFinishing()) {
-//                return;
-//            }
-//
-//            materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays));        }
-//    }
-
-
 }
