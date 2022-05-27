@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageButton
+        android:id="@+id/MypagePlace_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.013"
+        android:background="@drawable/ic_btn_back" />
+
+    <TextView
+        android:id="@+id/MypagePlace_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="28dp"
+        android:text="찜한 장소"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:textColor="#4D4D4D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/MypagePlace_back_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/MypagePlace_lay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MypagePlace_title"
+        android:layout_marginTop="40dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/line_sample">
+
+        <TextView
+            android:id="@+id/MypagePlace_txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중화원"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음식점 > 중식 > 중화요리"
+            app:layout_constraintStart_toEndOf="@id/MypagePlace_txt2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/iv_location2"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MypagePlace_txt2"
+            android:layout_margin="20dp"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="29dp"
+            android:layout_height="15dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/call"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_location2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="64dp"
+            android:text="서울 은평구 통일로66길 10-16"
+            app:layout_constraintStart_toStartOf="@id/iv_location2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="02-353-3379"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView3" />
+
+        <ImageView
+            android:id="@+id/full_heart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/full_heart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/MypagePlace_lay2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MypagePlace_lay1"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/line_sample">
+
+        <TextView
+            android:id="@+id/MypagePlace_txt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="횟집산이네"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음식점 > 한식 > 해물,생선 > 회"
+            app:layout_constraintStart_toEndOf="@id/MypagePlace_txt3"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/iv_location3"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MypagePlace_txt3"
+            android:layout_margin="20dp"/>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="29dp"
+            android:layout_height="15dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/call"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_location3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="64dp"
+            android:text="서울 은평구 통일로66길 4-1"
+            app:layout_constraintStart_toStartOf="@id/iv_location3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="02-384-5466"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView4" />
+
+        <ImageView
+            android:id="@+id/full_heart2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/full_heart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

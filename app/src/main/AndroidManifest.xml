@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,8 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Per_fact"
-        android:usesCleartextTraffic="true"
-        tools:replace="android:appComponentFactory">
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.MapsActivity"
             android:exported="true" >
@@ -30,10 +28,6 @@
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.IntroActivity"
@@ -41,6 +35,10 @@
         </activity>
         <activity android:name=".Activity.LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.OfficeActivity"
@@ -52,11 +50,6 @@
             android:name=".Activity.CompleteActivity"
             android:exported="true" />
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/myappKey" />
-
-
         <!--        마이페이지액티비티들선언-->
         <activity
             android:name=".Activity.MypageAsk"
@@ -67,9 +60,9 @@
         <activity
             android:name=".Activity.MypageLogout"
             android:theme="@android:style/Theme.Dialog" />
-
-
-
+        <activity
+            android:name=".Activity.MypagePlace"
+            android:exported="true"  />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

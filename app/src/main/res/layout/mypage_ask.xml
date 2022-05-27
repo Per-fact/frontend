@@ -136,7 +136,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Kusitms12345@gmail.com."
+            android:hint="osj8528@gmail.com"
             android:textColor="#4D4D4D"
             android:background="@drawable/layout_border"
             android:textSize="14dp"

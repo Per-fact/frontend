@@ -38,11 +38,4 @@
         android:text="홈으로 가기"
         android:textColor="#3685FF" />
 
-    <TextView
-        android:id="@+id/et_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="아직 장소를 못 정하셨나요?"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"/>
 </LinearLayout>
